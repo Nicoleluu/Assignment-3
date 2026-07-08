@@ -1,34 +1,35 @@
 var materialSketch = function (p) {
 
   p.setup = function () {
-
-    let canvas = p.createCanvas(1100, 550);
+    let canvas = p.createCanvas(900, 600);
     canvas.parent("material-canvas");
-
   };
 
   p.draw = function () {
 
     p.background(247, 244, 238);
 
+    // -----------------------------
     // Title
+    // -----------------------------
     p.noStroke();
     p.fill(50);
     p.textAlign(p.LEFT);
     p.textSize(26);
-    p.text("Bent Lamination", 50, 55);
+    p.text("Bent Laminated Plywood", 50, 55);
 
     p.textSize(14);
     p.fill(120);
     p.text("Move the mouse → Flat to Formed", 50, 80);
 
-    // Animation progress
+    // Progress (0–1)
     let t = p.map(p.mouseX, 0, p.width, 0, 1);
     t = p.constrain(t, 0, 1);
 
+    // Maximum bend
     let maxBend = 90;
 
-    // Veneer layers
+    // Draw plywood layers
     p.strokeWeight(3);
     p.noFill();
 
@@ -53,13 +54,14 @@ var materialSketch = function (p) {
 
     }
 
-    // Mold outline
+    // -----------------------------
+    // Mold
+    // -----------------------------
     p.noFill();
     p.stroke(80, 80);
     p.strokeWeight(2);
 
     p.beginShape();
-
     for (let x = 120; x <= 780; x += 8) {
 
       let u = p.map(x, 120, 780, 0, 1);
@@ -68,11 +70,9 @@ var materialSketch = function (p) {
       p.vertex(x, 170 - maxBend * curve);
 
     }
-
     p.endShape();
 
     p.beginShape();
-
     for (let x = 120; x <= 780; x += 8) {
 
       let u = p.map(x, 120, 780, 0, 1);
@@ -81,37 +81,31 @@ var materialSketch = function (p) {
       p.vertex(x, 430 - maxBend * curve);
 
     }
-
     p.endShape();
 
-    // Stage text
+    // -----------------------------
+    // Progress text
+    // -----------------------------
     p.noStroke();
     p.fill(80);
     p.textAlign(p.CENTER);
     p.textSize(14);
 
     if (t < 0.33) {
-
       p.text("Stage 1 · Flat Veneers", p.width / 2, 520);
-
     } else if (t < 0.66) {
-
       p.text("Stage 2 · Pressing into Mold", p.width / 2, 520);
-
     } else {
-
       p.text("Stage 3 · Formed Plywood", p.width / 2, 520);
-
     }
 
     // Progress bar
     p.stroke(180);
-    p.line(180, 540, 720, 540);
+    p.line(180, 550, 720, 550);
 
     p.noStroke();
     p.fill(90);
-    p.circle(180 + t * 540, 540, 14);
-
+    p.ellipse(180 + t * 540, 550, 14, 14);
   };
 
 };
