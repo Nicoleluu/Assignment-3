@@ -1,48 +1,53 @@
-let chair;
-let reveal;
+var drawSketch = function (p) {
 
-function preload() {
-  chair = p.loadImage("p5/chair.png");
-}
+  let chair;
+  let reveal;
 
-function setup() {
-  let canvas = createCanvas(900,600);
-canvas.parent("chair-sketch");
-  
-  reveal = createGraphics(width,height);
-  reveal.background(247,244,238);
-}
+  p.preload = function () {
+    chair = p.loadImage("p5/chair.png");
+  };
 
-function draw() {
+  p.setup = function () {
 
-  background(247,244,238);
+    let canvas = p.createCanvas(900, 600);
+    canvas.parent("chair-sketch");
 
-  let scale = 0.75;
+    reveal = p.createGraphics(900, 600);
+    reveal.background(247, 244, 238);
 
-  let w = chair.width * scale;
-  let h = chair.height * scale;
+  };
 
-  let x = (width-w)/2;
-  let y = (height-h)/2;
+  p.draw = function () {
 
-  image(chair,x,y,w,h);
+    p.background(247, 244, 238);
 
-  if(mouseIsPressed){
+    let scale = 0.75;
 
-    reveal.erase();
+    let w = chair.width * scale;
+    let h = chair.height * scale;
 
-    reveal.circle(mouseX,mouseY,70);
+    let x = (p.width - w) / 2;
+    let y = (p.height - h) / 2;
 
-    reveal.noErase();
+    p.image(chair, x, y, w, h);
 
-  }
+    if (p.mouseIsPressed) {
 
-  image(reveal,0,0);
+      reveal.erase();
+      reveal.circle(p.mouseX, p.mouseY, 70);
+      reveal.noErase();
 
-  noFill();
-  stroke(90);
-  strokeWeight(1);
-  circle(mouseX,mouseY,70);
+    }
 
-}
+    p.image(reveal, 0, 0);
+
+    p.noFill();
+    p.stroke(90);
+    p.strokeWeight(1);
+    p.circle(p.mouseX, p.mouseY, 70);
+
+  };
+
+};
+
 new p5(drawSketch, "chair-sketch");
