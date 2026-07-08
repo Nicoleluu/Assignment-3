@@ -1,3 +1,5 @@
+console.log("EXPLORE JS LOADED");
+
 let scene, camera, renderer, controls;
 
 const container = document.getElementById("chair-canvas");
