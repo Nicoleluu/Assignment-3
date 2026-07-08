@@ -1,6 +1,6 @@
 function setup() {
 
-  let canvas = createCanvas(1100, 550));
+  let canvas = createCanvas(1100, 550);
 
   canvas.parent("material-canvas");
 
