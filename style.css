@@ -250,7 +250,7 @@ footer{
 
 }
 
-footer h2{
+footer h2{ﬁ
 
     margin-bottom:20px;
 
@@ -308,6 +308,21 @@ footer p{
     z-index: 2;
 
 }
+
+/* ---------------- BLUEPRINT ---------------- */
+
+.blueprint-image{
+
+    display:block;
+
+    width:100%;
+
+    max-width:900px;
+
+    margin:60px auto;
+
+}
+
 /* ---------------- RESPONSIVE ---------------- */
 
 @media(max-width:900px){
