@@ -1,65 +1,65 @@
 var drawSketch = function (p) {
 
   let chair;
-  let revealed;
+  let maskLayer;
 
   p.preload = function () {
     chair = p.loadImage("p5/chair.png");
   };
 
   p.setup = function () {
-    let canvas = p.createCanvas(900, 600);
+
+    let canvas = p.createCanvas(900,600);
     canvas.parent("chair-sketch");
 
-    revealed = p.createGraphics(900, 600);
-    revealed.clear();
+    maskLayer = p.createGraphics(900,600);
+    maskLayer.background(247,244,238);
+
   };
 
   p.draw = function () {
-    p.background(247, 244, 238);
+
+    p.background(247,244,238);
 
     let scale = 0.75;
+
     let w = chair.width * scale;
     let h = chair.height * scale;
-    let x = (p.width - w) / 2;
-    let y = (p.height - h) / 2;
 
-    // faint guide image
-    p.tint(0, 18);
-    p.image(chair, x, y, w, h);
-    p.noTint();
+    let x = (p.width-w)/2;
+    let y = (p.height-h)/2;
 
-    // when dragging, reveal image onto hidden layer
-    if (p.mouseIsPressed) {
-      revealed.push();
+    // draw the chair FIRST
+    p.image(chair,x,y,w,h);
 
-      revealed.drawingContext.save();
-      revealed.drawingContext.beginPath();
-      revealed.drawingContext.arc(p.mouseX, p.mouseY, 45, 0, Math.PI * 2);
-      revealed.drawingContext.clip();
+    // erase the paper where the mouse moves
+    if(p.mouseIsPressed){
 
-      revealed.image(chair, x, y, w, h);
+      maskLayer.erase();
 
-      revealed.drawingContext.restore();
-      revealed.pop();
+      maskLayer.circle(p.mouseX,p.mouseY,70);
+
+      maskLayer.noErase();
+
     }
 
-    // draw revealed parts
-    p.image(revealed, 0, 0);
+    // paper goes on top
+    p.image(maskLayer,0,0);
 
-    // brush cursor
+    // cursor
     p.noFill();
-    p.stroke(90, 120);
+    p.stroke(80);
     p.strokeWeight(1);
-    p.circle(p.mouseX, p.mouseY, 90);
+    p.circle(p.mouseX,p.mouseY,70);
 
     p.noStroke();
     p.fill(80);
     p.textAlign(p.CENTER);
     p.textSize(14);
-    p.text("Hold and drag to reveal the chair sketch", p.width / 2, 565);
+    p.text("Hold and drag to reveal",450,565);
+
   };
 
 };
 
-new p5(drawSketch, "chair-sketch");
+new p5(drawSketch,"chair-sketch");
