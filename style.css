@@ -224,30 +224,20 @@ h2{
 /* ---------------- CANVAS ---------------- */
 
 .canvas{
-
     margin-top:60px;
-
     width:900px;
     max-width:100%;
-
     margin-left:auto;
     margin-right:auto;
-
     background:transparent;
-
     border:none;
-
     overflow:hidden;
-
-    .canvas canvas{
-
-    display:block;
-
-    width:100%;
-    height:auto;
-
 }
 
+.canvas canvas{
+    display:block;
+    width:100%;
+    height:auto;
 }
 
 /* ---------------- FOOTER ---------------- */
