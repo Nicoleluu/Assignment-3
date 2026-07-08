@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Take a Seat.</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+<!-- P5 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+
+<!-- Three.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+</head>
+
+<body>
+
+<!-- Progress Navigation -->
+
+<div class="progress-nav">
+
+<div class="progress-dot active"></div>
+<div class="progress-line"></div>
+
+<div class="chapter-number">01</div>
+<div class="chapter-number">02</div>
+<div class="chapter-number">03</div>
+<div class="chapter-number">04</div>
+<div class="chapter-number">05</div>
+<div class="chapter-number">06</div>
+
+</div>
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<p class="hero-label">
+Interactive Design Study
+</p>
+
+<h1>
+Take a Seat.
+</h1>
+
+<p class="hero-description">
+
+An interactive journey through one iconic chair.
+
+Explore its history, geometry, construction,
+and assembly through drawings, interaction,
+and 3D space.
+
+</p>
+
+<a href="#observe" class="begin-button">
+
+Begin →
+
+</a>
+
+</div>
+
+<div class="hero-animation">
+
+<!-- CNC animation goes here later -->
+
+<div class="wood-board">
+
+<div class="cnc-placeholder">
+
+CNC TITLE ANIMATION
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- OBSERVE -->
+
+<section class="chapter" id="observe">
+
+<div class="chapter-header">
+
+<p class="chapter-index">
+
+01
+
+</p>
+
+<h2>
+
+Observe
+
+</h2>
+
+</div>
+
+<div class="chapter-grid">
+
+<div>
+
+<p>
+
+Every object begins with observation.
+
+Before taking the chair apart,
+look carefully at its proportions,
+its silhouette,
+and the relationship between wood and steel.
+
+</p>
+
+</div>
+
+<div class="image-placeholder">
+
+Chair Image
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PARTS -->
+
+<section class="chapter">
+
+<div class="chapter-header">
+
+<p class="chapter-index">
+
+02
+
+</p>
+
+<h2>
+
+Know the Parts
+
+</h2>
+
+</div>
+
+<div class="parts-diagram">
+
+<div class="part">
+
+Backrest
+
+</div>
+
+<div class="part">
+
+Seat
+
+</div>
+
+<div class="part">
+
+Frame
+
+</div>
+
+<div class="part">
+
+Legs
+
+</div>
+
+</div>
+
+<p class="chapter-note">
+
+Hover interactions will be added later.
+
+</p>
+
+</section>
+
+<!-- P5 BLUEPRINT -->
+
+<section class="chapter">
+
+<div class="chapter-header">
+
+<p class="chapter-index">
+
+03
+
+</p>
+
+<h2>
+
+Blueprint
+
+</h2>
+
+</div>
+
+<p class="chapter-note">
+
+Interactive P5.js drawing.
+
+</p>
+
+<div id="blueprint-canvas" class="canvas-placeholder">
+
+P5 Canvas 01
+
+</div>
+
+</section>
+
+<!-- P5 ASSEMBLY -->
+
+<section class="chapter">
+
+<div class="chapter-header">
+
+<p class="chapter-index">
+
+04
+
+</p>
+
+<h2>
+
+Assemble
+
+</h2>
+
+</div>
+
+<p class="chapter-note">
+
+Interactive P5.js animation.
+
+</p>
+
+<div id="assembly-canvas" class="canvas-placeholder">
+
+P5 Canvas 02
+
+</div>
+
+</section>
+
+<!-- THREE -->
+
+<section class="chapter">
+
+<div class="chapter-header">
+
+<p class="chapter-index">
+
+05
+
+</p>
+
+<h2>
+
+Explore
+
+</h2>
+
+</div>
+
+<p class="chapter-note">
+
+Rotate the chair in 3D.
+
+</p>
+
+<div id="chair-canvas" class="canvas-placeholder">
+
+Three.js Canvas 01
+
+</div>
+
+</section>
+
+<!-- EXPLODED -->
+
+<section class="chapter">
+
+<div class="chapter-header">
+
+<p class="chapter-index">
+
+06
+
+</p>
+
+<h2>
+
+Exploded View
+
+</h2>
+
+</div>
+
+<p class="chapter-note">
+
+Explore how every component comes together.
+
+</p>
+
+<div id="exploded-canvas" class="canvas-placeholder">
+
+Three.js Canvas 02
+
+</div>
+
+</section>
+
+<!-- END -->
+
+<section class="ending">
+
+<h2>
+
+Take a Seat.
+
+</h2>
+
+<p>
+
+Thanks for exploring.
+
+</p>
+
+</section>
+
+</main>
+
+<script src="script.js"></script>
+
+<!-- P5 sketches -->
+
+<script src="p5/blueprint.js"></script>
+<script src="p5/assembly.js"></script>
+
+<!-- Three sketches -->
+
+<script src="three/chair.js"></script>
+<script src="three/exploded.js"></script>
+
+</body>
+
+</html>
