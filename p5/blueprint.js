@@ -16,7 +16,7 @@ function draw() {
   fill(50);
   textAlign(LEFT);
   textSize(26);
-  text("Bent Laminated Plywood", 50, 55);
+  text("Bent Lamination", 50, 55);
 
   textSize(14);
   fill(120);
