@@ -17,49 +17,47 @@ var drawSketch = function (p) {
 
   };
 
-  p.draw = function () {
+p.draw = function () {
 
-    p.background(247, 244, 238);
+  p.background(247,244,238);
 
-    let scale = 0.75;
+  let scale = 0.75;
 
-    let w = chair.width * scale;
-    let h = chair.height * scale;
+  let w = chair.width * scale;
+  let h = chair.height * scale;
 
-    let x = (p.width - w) / 2;
-    let y = (p.height - h) / 2;
+  let x = (p.width - w)/2;
+  let y = (p.height - h)/2;
 
-    // Draw the chair
-    p.image(chair, x, y, w, h);
+  // keep the beige cover
+  p.image(reveal,0,0);
 
-    // Erase mask where the mouse is held
-    if (p.mouseIsPressed) {
+  if(p.mouseIsPressed){
 
-      reveal.erase();
+    reveal.erase();
+    reveal.circle(p.mouseX,p.mouseY,70);
+    reveal.noErase();
 
-      reveal.circle(p.mouseX, p.mouseY, 70);
+  }
 
-      reveal.noErase();
+  // clip the chair to the revealed area
+  p.push();
 
-    }
+  p.drawingContext.save();
+  p.drawingContext.globalCompositeOperation = "destination-over";
 
-    // Draw mask over image
-    p.image(reveal, 0, 0);
+  p.image(chair,x,y,w,h);
 
-    // Cursor
-    p.noFill();
-    p.stroke(90);
-    p.strokeWeight(1);
-    p.circle(p.mouseX, p.mouseY, 70);
+  p.drawingContext.restore();
 
-    // Instructions
-    p.noStroke();
-    p.fill(80);
-    p.textAlign(p.CENTER);
-    p.textSize(14);
-    p.text("Click and drag to reveal the drawing", p.width / 2, 565);
+  p.pop();
 
-  };
+  // cursor
+  p.noFill();
+  p.stroke(90);
+  p.circle(p.mouseX,p.mouseY,70);
+
+}
 
 };
 
