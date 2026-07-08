@@ -2,7 +2,7 @@ let chair;
 let reveal;
 
 function preload() {
-  chair = loadImage("chair.png");
+  chair = p.loadImage("p5/chair.png");
 }
 
 function setup() {
@@ -45,3 +45,4 @@ function draw() {
   circle(mouseX,mouseY,70);
 
 }
+new p5(drawSketch, "chair-sketch");
