@@ -1,0 +1,317 @@
+:root{
+
+    --bg:#F8F6F2;
+    --text:#232323;
+    --line:#DDD7CE;
+
+    --wood:#C79A63;
+    --steel:#444444;
+
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    background:var(--bg);
+    color:var(--text);
+
+    font-family:"Inter",sans-serif;
+
+}
+
+main{
+    width:min(1100px,90%);
+    margin:auto;
+}
+
+/* ---------------- HERO ---------------- */
+
+.hero{
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+}
+
+.hero-content{
+
+    max-width:700px;
+
+}
+
+.label{
+
+    font-family:"IBM Plex Mono",monospace;
+
+    font-size:.8rem;
+
+    letter-spacing:2px;
+
+    color:#777;
+
+    margin-bottom:20px;
+
+    text-transform:uppercase;
+
+}
+
+h1{
+
+    font-size:6rem;
+    font-weight:600;
+
+    line-height:1;
+
+    margin-bottom:30px;
+
+}
+
+.intro{
+
+    font-size:1.2rem;
+
+    line-height:1.7;
+
+    color:#666;
+
+    margin-bottom:50px;
+
+}
+
+.button{
+
+    display:inline-block;
+
+    padding:16px 34px;
+
+    border:1px solid var(--text);
+
+    color:var(--text);
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.button:hover{
+
+    background:var(--text);
+
+    color:white;
+
+}
+
+/* ---------------- SECTIONS ---------------- */
+
+.section{
+
+    padding:160px 0;
+
+    border-top:1px solid var(--line);
+
+}
+
+.section-number{
+
+    font-family:"IBM Plex Mono",monospace;
+
+    color:#999;
+
+    margin-bottom:20px;
+
+}
+
+h2{
+
+    font-size:3.4rem;
+
+    font-weight:500;
+
+    margin-bottom:30px;
+
+}
+
+.section p{
+
+    max-width:650px;
+
+    line-height:1.8;
+
+    font-size:1.1rem;
+
+    color:#555;
+
+}
+
+/* ---------------- IMAGE ---------------- */
+
+.image-placeholder{
+
+    margin-top:60px;
+
+    width:100%;
+
+    height:550px;
+
+    border:1px solid var(--line);
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    color:#999;
+
+    background:white;
+
+}
+
+/* ---------------- PARTS ---------------- */
+
+.parts{
+
+    margin-top:60px;
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:20px;
+
+}
+
+.part{
+
+    border:1px solid var(--line);
+
+    padding:50px;
+
+    text-align:center;
+
+    transition:.3s;
+
+    cursor:pointer;
+
+    background:white;
+
+}
+
+.part:hover{
+
+    transform:translateY(-6px);
+
+    border-color:var(--wood);
+
+}
+
+/* ---------------- CANVAS ---------------- */
+
+.canvas{
+
+    margin-top:60px;
+
+    width:100%;
+
+    height:600px;
+
+    border:1px solid var(--line);
+
+    background:white;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    color:#999;
+
+}
+
+/* ---------------- FOOTER ---------------- */
+
+footer{
+
+    padding:200px 0;
+
+    text-align:center;
+
+}
+
+footer h2{
+
+    margin-bottom:20px;
+
+}
+
+footer p{
+
+    color:#777;
+
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media(max-width:900px){
+
+    h1{
+
+        font-size:4rem;
+
+    }
+
+    h2{
+
+        font-size:2.5rem;
+
+    }
+
+    .parts{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .canvas{
+
+        height:450px;
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    h1{
+
+        font-size:3rem;
+
+    }
+
+    h2{
+
+        font-size:2rem;
+
+    }
+
+    .hero{
+
+        min-height:80vh;
+
+    }
+
+}
