@@ -1,19 +1,9 @@
 var materialSketch = function (p) {
 
-  let chair;
-  let reveal;
-
-  p.preload = function () {
-    chair = p.loadImage("p5/chair.png");
-  };
-
   p.setup = function () {
 
-    let canvas = p.createCanvas(900, 600);
-    canvas.parent("chair-sketch");
-
-    reveal = p.createGraphics(900, 600);
-    reveal.background(247, 244, 238);
+    let canvas = p.createCanvas(1100, 550);
+    canvas.parent("material-canvas");
 
   };
 
@@ -21,30 +11,106 @@ var materialSketch = function (p) {
 
     p.background(247, 244, 238);
 
-    let scale = 0.75;
+    // Title
+    p.noStroke();
+    p.fill(50);
+    p.textAlign(p.LEFT);
+    p.textSize(26);
+    p.text("Bent Lamination", 50, 55);
 
-    let w = chair.width * scale;
-    let h = chair.height * scale;
+    p.textSize(14);
+    p.fill(120);
+    p.text("Move the mouse → Flat to Formed", 50, 80);
 
-    let x = (p.width - w) / 2;
-    let y = (p.height - h) / 2;
+    // Animation progress
+    let t = p.map(p.mouseX, 0, p.width, 0, 1);
+    t = p.constrain(t, 0, 1);
 
-    p.image(chair, x, y, w, h);
+    let maxBend = 90;
 
-    if (p.mouseIsPressed) {
+    // Veneer layers
+    p.strokeWeight(3);
+    p.noFill();
 
-      reveal.erase();
-      reveal.circle(p.mouseX, p.mouseY, 70);
-      reveal.noErase();
+    for (let y = 170; y <= 430; y += 12) {
+
+      let wood = p.map(y, 170, 430, 175, 215);
+      p.stroke(wood, 145, 90);
+
+      p.beginShape();
+
+      for (let x = 120; x <= 780; x += 8) {
+
+        let u = p.map(x, 120, 780, 0, 1);
+        let curve = p.sin(u * p.PI);
+        let offset = -maxBend * curve * t;
+
+        p.vertex(x, y + offset);
+
+      }
+
+      p.endShape();
 
     }
 
-    p.image(reveal, 0, 0);
-
+    // Mold outline
     p.noFill();
-    p.stroke(90);
-    p.strokeWeight(1);
-    p.circle(p.mouseX, p.mouseY, 70);
+    p.stroke(80, 80);
+    p.strokeWeight(2);
+
+    p.beginShape();
+
+    for (let x = 120; x <= 780; x += 8) {
+
+      let u = p.map(x, 120, 780, 0, 1);
+      let curve = p.sin(u * p.PI);
+
+      p.vertex(x, 170 - maxBend * curve);
+
+    }
+
+    p.endShape();
+
+    p.beginShape();
+
+    for (let x = 120; x <= 780; x += 8) {
+
+      let u = p.map(x, 120, 780, 0, 1);
+      let curve = p.sin(u * p.PI);
+
+      p.vertex(x, 430 - maxBend * curve);
+
+    }
+
+    p.endShape();
+
+    // Stage text
+    p.noStroke();
+    p.fill(80);
+    p.textAlign(p.CENTER);
+    p.textSize(14);
+
+    if (t < 0.33) {
+
+      p.text("Stage 1 · Flat Veneers", p.width / 2, 520);
+
+    } else if (t < 0.66) {
+
+      p.text("Stage 2 · Pressing into Mold", p.width / 2, 520);
+
+    } else {
+
+      p.text("Stage 3 · Formed Plywood", p.width / 2, 520);
+
+    }
+
+    // Progress bar
+    p.stroke(180);
+    p.line(180, 540, 720, 540);
+
+    p.noStroke();
+    p.fill(90);
+    p.circle(180 + t * 540, 540, 14);
 
   };
 
