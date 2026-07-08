@@ -26,6 +26,8 @@ renderer = new THREE.WebGLRenderer({
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(container.clientWidth, 500);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 container.innerHTML = "";
 container.appendChild(renderer.domElement);
@@ -38,14 +40,29 @@ controls.autoRotate = true;
 controls.autoRotateSpeed = 1;
 
 // Lighting
-const ambient = new THREE.AmbientLight(0xffffff, 1.8);
+
+const ambient = new THREE.AmbientLight(0xffffff, 0.15);
 scene.add(ambient);
 
-const light = new THREE.DirectionalLight(0xffffff, 2);
+// Main warm light
+const keyLight = new THREE.DirectionalLight(0xfff5ea, 2.4);
+keyLight.position.set(5, 6, 2);
+keyLight.castShadow = true;
 
-light.position.set(5, 8, 5);
+keyLight.shadow.mapSize.width = 2048;
+keyLight.shadow.mapSize.height = 2048;
 
-scene.add(light);
+scene.add(keyLight);
+
+// Cool rim light
+const rimLight = new THREE.DirectionalLight(0xdfefff, 1.2);
+rimLight.position.set(-6, 3, -6);
+scene.add(rimLight);
+
+// Soft fill light
+const fillLight = new THREE.PointLight(0xffffff, 0.5);
+fillLight.position.set(0, 3, 2);
+scene.add(fillLight);
 
 // Load model
 const loader = new THREE.GLTFLoader();
@@ -56,13 +73,23 @@ loader.load(
 
     function(gltf){
 
-        const chair = gltf.scene;
+       const chair = gltf.scene;
 
-        chair.scale.set(1,1,1);
+chair.traverse(function(child){
 
-        chair.position.set(0,-1,0);
+    if(child.isMesh){
 
-        scene.add(chair);
+        child.castShadow = true;
+        child.receiveShadow = true;
+
+    }
+
+});
+
+chair.scale.set(1,1,1);
+chair.position.set(0,-1,0);
+
+scene.add(chair);
 
     },
 
