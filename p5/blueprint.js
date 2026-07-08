@@ -1,115 +1,134 @@
-function setup() {
+var materialSketch = function (p) {
 
-  let canvas = createCanvas(1100, 550);
+  p.setup = function () {
 
-  canvas.parent("material-canvas");
+    let canvas = p.createCanvas(1100, 550);
+    canvas.parent("material-canvas");
 
-}
+  };
 
-function draw() {
-  background(247, 244, 238);
+  p.draw = function () {
 
-  // -----------------------------
-  // Title
-  // -----------------------------
-  noStroke();
-  fill(50);
-  textAlign(LEFT);
-  textSize(26);
-  text("Bent Lamination", 50, 55);
+    p.background(247, 244, 238);
 
-  textSize(14);
-  fill(120);
-  text("Move the mouse → Flat to Formed", 50, 80);
+    // -----------------------------
+    // Title
+    // -----------------------------
+    p.noStroke();
+    p.fill(50);
+    p.textAlign(p.LEFT);
+    p.textSize(26);
+    p.text("Bent Lamination", 50, 55);
 
-  // Progress (0–1)
-  let t = map(mouseX, 0, width, 0, 1);
-  t = constrain(t, 0, 1);
+    p.textSize(14);
+    p.fill(120);
+    p.text("Move the mouse → Flat to Formed", 50, 80);
 
-  // Maximum bend
-  let maxBend = 90;
+    // Progress
+    let t = p.map(p.mouseX, 0, p.width, 0, 1);
+    t = p.constrain(t, 0, 1);
 
-  // Draw plywood layers
-  strokeWeight(3);
-  noFill();
+    let maxBend = 90;
 
-  for (let y = 170; y <= 430; y += 12) {
+    // -----------------------------
+    // Plywood Layers
+    // -----------------------------
+    p.strokeWeight(3);
+    p.noFill();
 
-    let wood = map(y,170,430,175,215);
-    stroke(wood,145,90);
+    for (let y = 170; y <= 430; y += 12) {
 
-    beginShape();
+      let wood = p.map(y, 170, 430, 175, 215);
 
-    for (let x = 120; x <= 780; x += 8) {
+      p.stroke(wood, 145, 90);
 
-      // normalized x (0 → 1)
-      let u = map(x,120,780,0,1);
+      p.beginShape();
 
-      // nice smooth arch
-      let curve = sin(u * PI);
+      for (let x = 120; x <= 780; x += 8) {
 
-      // whole sheet bends together
-      let offset = -maxBend * curve * t;
+        let u = p.map(x, 120, 780, 0, 1);
 
-      vertex(x, y + offset);
+        let curve = p.sin(u * p.PI);
+
+        let offset = -maxBend * curve * t;
+
+        p.vertex(x, y + offset);
+
+      }
+
+      p.endShape();
 
     }
 
-    endShape();
-  }
+    // -----------------------------
+    // Mold
+    // -----------------------------
+    p.noFill();
+    p.stroke(80, 80);
+    p.strokeWeight(2);
 
-  // -----------------------------
-  // Mold
-  // -----------------------------
-  noFill();
-  stroke(80,80);
-  strokeWeight(2);
+    p.beginShape();
 
-  beginShape();
-  for(let x=120;x<=780;x+=8){
+    for (let x = 120; x <= 780; x += 8) {
 
-    let u=map(x,120,780,0,1);
-    let curve=sin(u*PI);
+      let u = p.map(x, 120, 780, 0, 1);
 
-    vertex(x,170-maxBend*curve);
+      let curve = p.sin(u * p.PI);
 
-  }
-  endShape();
+      p.vertex(x, 170 - maxBend * curve);
 
-  beginShape();
-  for(let x=120;x<=780;x+=8){
+    }
 
-    let u=map(x,120,780,0,1);
-    let curve=sin(u*PI);
+    p.endShape();
 
-    vertex(x,430-maxBend*curve);
+    p.beginShape();
 
-  }
-  endShape();
+    for (let x = 120; x <= 780; x += 8) {
 
-  // -----------------------------
-  // Progress text
-  // -----------------------------
-  noStroke();
-  fill(80);
-  textAlign(CENTER);
-  textSize(14);
+      let u = p.map(x, 120, 780, 0, 1);
 
-  if(t < 0.33){
-    text("Stage 1 · Flat Veneers", width/2, 520);
-  }
-  else if(t < 0.66){
-    text("Stage 2 · Pressing into Mold", width/2, 520);
-  }
-  else{
-    text("Stage 3 · Formed Plywood", width/2, 520);
-  }
+      let curve = p.sin(u * p.PI);
 
-  // Progress bar
-  stroke(180);
-  line(180,550,720,550);
+      p.vertex(x, 430 - maxBend * curve);
 
-  noStroke();
-  fill(90);
-  ellipse(180 + t*540,550,14);
-}
+    }
+
+    p.endShape();
+
+    // -----------------------------
+    // Stage Text
+    // -----------------------------
+    p.noStroke();
+    p.fill(80);
+    p.textAlign(p.CENTER);
+    p.textSize(14);
+
+    if (t < 0.33) {
+
+      p.text("Stage 1 · Flat Veneers", p.width / 2, 520);
+
+    } else if (t < 0.66) {
+
+      p.text("Stage 2 · Pressing into Mold", p.width / 2, 520);
+
+    } else {
+
+      p.text("Stage 3 · Formed Plywood", p.width / 2, 520);
+
+    }
+
+    // -----------------------------
+    // Progress Bar
+    // -----------------------------
+    p.stroke(180);
+    p.line(180, 540, 720, 540);
+
+    p.noStroke();
+    p.fill(90);
+    p.ellipse(180 + t * 540, 540, 14);
+
+  };
+
+};
+
+new p5(materialSketch);
