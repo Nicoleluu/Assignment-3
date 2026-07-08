@@ -1,4 +1,4 @@
-var drawSketch = function (p) {
+var materialSketch = function (p) {
 
   let chair;
   let reveal;
@@ -50,4 +50,4 @@ var drawSketch = function (p) {
 
 };
 
-new p5(drawSketch);
+new p5(materialSketch, "material-canvas");
