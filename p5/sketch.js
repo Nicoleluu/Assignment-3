@@ -13,7 +13,7 @@ var drawSketch = function (p) {
     canvas.parent("chair-sketch");
 
     reveal = p.createGraphics(900, 600);
-    reveal.background(247, 244, 238);
+    reveal.background(247, 244, 238, 255);
 
   };
 
