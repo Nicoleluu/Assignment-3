@@ -1,51 +1,26 @@
 var drawSketch = function (p) {
 
   let chair;
-  let reveal;
 
   p.preload = function () {
-    chair = p.loadImage("p5/chair.png");
+    chair = p.loadImage(
+      "p5/chair.png",
+      () => console.log("IMAGE LOADED"),
+      () => console.log("IMAGE FAILED")
+    );
   };
 
   p.setup = function () {
-
     let canvas = p.createCanvas(900, 600);
     canvas.parent("chair-sketch");
-
-    reveal = p.createGraphics(900, 600);
-    reveal.background(247, 244, 238);
-
   };
 
   p.draw = function () {
+    p.background(240);
 
-    p.background(247, 244, 238);
-
-    let scale = 0.75;
-
-    let w = chair.width * scale;
-    let h = chair.height * scale;
-
-    let x = (p.width - w) / 2;
-    let y = (p.height - h) / 2;
-
-    p.image(chair, x, y, w, h);
-
-    if (p.mouseIsPressed) {
-
-      reveal.erase();
-      reveal.circle(p.mouseX, p.mouseY, 70);
-      reveal.noErase();
-
+    if (chair) {
+      p.image(chair, 100, 50, 500, 500);
     }
-
-    p.image(reveal, 0, 0);
-
-    p.noFill();
-    p.stroke(90);
-    p.strokeWeight(1);
-    p.circle(p.mouseX, p.mouseY, 70);
-
   };
 
 };
