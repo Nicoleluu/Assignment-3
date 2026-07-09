@@ -184,12 +184,9 @@ const labels = [
 ];
 
 button.innerHTML = labels[0];
-
+let targetPiece = null;
+let targetPosition = null;
 button.onclick = function(){
-
-    // --------------------------
-    // Replay
-    // --------------------------
 
     if(step === pieces.length){
 
@@ -201,33 +198,36 @@ button.onclick = function(){
 
         button.innerHTML = labels[0];
 
+        targetPiece = null;
+
         return;
-
     }
-
-    const part = pieces[step].object;
 
     if(step === 0){
 
-        part.position.y = 0;
+        targetPiece = legs;
+        targetPosition = new THREE.Vector3(0,0,0);
 
     }
 
-    if(step === 1){
+    else if(step === 1){
 
-        part.position.y = 0.1;
-
-    }
-
-    if(step === 2){
-
-        part.position.set(0,1,-0.8);
+        targetPiece = seat;
+        targetPosition = new THREE.Vector3(0,0.1,0);
 
     }
 
-    if(step === 3){
+    else if(step === 2){
 
-        part.position.set(0,2.2,-0.8);
+        targetPiece = support;
+        targetPosition = new THREE.Vector3(0,1,-0.8);
+
+    }
+
+    else if(step === 3){
+
+        targetPiece = back;
+        targetPosition = new THREE.Vector3(0,2.2,-0.8);
 
     }
 
@@ -249,13 +249,41 @@ button.onclick = function(){
 
 };
 
+function resetChair(){
+
+    legs.position.y = -6;
+
+    seat.position.set(0,-6,0);
+
+    support.position.set(0,-6,-0.8);
+
+    back.position.set(0,-6,-0.8);
+
+}
+
 // ---------------- ANIMATION ----------------
 
-function animate() {
+function animate(){
 
     requestAnimationFrame(animate);
 
-    renderer.render(scene, camera);
+    if(targetPiece){
+
+        targetPiece.position.lerp(targetPosition,0.08);
+
+        if(targetPiece.position.distanceTo(targetPosition) < 0.02){
+
+            targetPiece.position.copy(targetPosition);
+
+            targetPiece = null;
+
+        }
+
+    }
+
+    controls.update();
+
+    renderer.render(scene,camera);
 
 }
 
