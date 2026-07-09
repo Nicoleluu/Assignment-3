@@ -1,3 +1,5 @@
+let chair;
+
 console.log("EXPLORE LOADED");
 
 const container = document.getElementById("chair-canvas");
@@ -74,7 +76,7 @@ loader.load(
 
     function(gltf){
 
-        const chair = gltf.scene;
+        chair = gltf.scene;
 const box = new THREE.Box3().setFromObject(chair);
 console.log(box.getSize(new THREE.Vector3()));
         chair.traverse(function(child){
@@ -106,13 +108,18 @@ console.log(box.getSize(new THREE.Vector3()));
 );
 
 // Animation
-function animate(){
+function animate() {
 
     requestAnimationFrame(animate);
 
+    // Rotate the chair
+    if (chair) {
+        chair.rotation.y += 0.005;
+    }
+
     controls.update();
 
-    renderer.render(scene,camera);
+    renderer.render(scene, camera);
 
 }
 
