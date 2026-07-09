@@ -90,8 +90,8 @@ console.log(box.getSize(new THREE.Vector3()));
 
         });
 
-       chair.scale.set(0.05,0.05,0.05);
-        chair.position.set(0,-1,0);
+       chair.scale.set(3,3,3);
+        chair.position.set(0,0,0);
 
         scene.add(chair);
 
