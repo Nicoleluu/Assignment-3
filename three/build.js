@@ -11,9 +11,12 @@ const container = document.getElementById("build-canvas");
 // ---------------- Scene ----------------
 
 scene = new THREE.Scene();
-scene.background = new THREE.Color(0xf7f4ee);
-scene.fog = new THREE.Fog(0xf7f4ee, 6, 18);
+renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    alpha: true
+});
 
+scene.background = null;
 // ---------------- Camera ----------------
 
 camera = new THREE.PerspectiveCamera(
@@ -23,7 +26,7 @@ camera = new THREE.PerspectiveCamera(
     100
 );
 
-camera.position.set(0, 6, 20);
+camera.position.set(0,1.5,4);
 
 // ---------------- Renderer ----------------
 
@@ -66,25 +69,6 @@ scene.add(rimLight);
 const fillLight = new THREE.PointLight(0xffffff,0.5);
 fillLight.position.set(0,3,2);
 scene.add(fillLight);
-
-// ---------------- Ground ----------------
-
-const floor = new THREE.Mesh(
-
-    new THREE.PlaneGeometry(20,20),
-
-    new THREE.ShadowMaterial({
-        opacity:0.18
-    })
-
-);
-
-floor.rotation.x = -Math.PI/2;
-floor.position.y = -1;
-
-floor.receiveShadow = true;
-
-scene.add(floor);
 
 // ---------------- Loader ----------------
 
