@@ -174,31 +174,58 @@ container.parentElement.appendChild(complete);
 
 let step = 0;
 
+const labels = [
+
+    "Add Legs",
+    "Add Seat",
+    "Add Support",
+    "Add Backrest"
+
+];
+
+button.innerHTML = labels[0];
+
 button.onclick = function(){
 
-    if(step>=pieces.length) return;
+    // --------------------------
+    // Replay
+    // --------------------------
+
+    if(step === pieces.length){
+
+        resetChair();
+
+        step = 0;
+
+        complete.style.opacity = "0";
+
+        button.innerHTML = labels[0];
+
+        return;
+
+    }
 
     const part = pieces[step].object;
 
-    if(step==0){
+    if(step === 0){
 
         part.position.y = 0;
 
     }
 
-    if(step==1){
+    if(step === 1){
 
-        part.position.y = .1;
+        part.position.y = 0.1;
 
     }
 
-    if(step==2){
+    if(step === 2){
 
         part.position.set(0,1,-0.8);
 
     }
 
-    if(step==3){
+    if(step === 3){
 
         part.position.set(0,2.2,-0.8);
 
@@ -206,10 +233,17 @@ button.onclick = function(){
 
     step++;
 
-    if(step===pieces.length){
+    if(step < pieces.length){
+
+        button.innerHTML = labels[step];
+
+    }
+
+    else{
 
         complete.style.opacity = "1";
-        button.innerHTML = "Completed";
+
+        button.innerHTML = "↺ Build Again";
 
     }
 
