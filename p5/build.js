@@ -175,17 +175,14 @@ container.parentElement.appendChild(complete);
 let step = 0;
 
 const labels = [
-
     "Add Legs",
     "Add Seat",
     "Add Support",
     "Add Backrest"
-
 ];
 
 button.innerHTML = labels[0];
-let targetPiece = null;
-let targetPosition = null;
+
 let targetPiece = null;
 let targetPosition = null;
 
