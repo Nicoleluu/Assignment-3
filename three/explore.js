@@ -5,8 +5,8 @@ let buildCamera;
 let buildRenderer;
 let buildControls;
 
-const container = document.getElementById("chair-canvas");
- 
+const container = document.getElementById("build-canvas");
+
 // ---------------- Scene ----------------
 
 scene = new THREE.Scene();
