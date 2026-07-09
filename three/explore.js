@@ -1,4 +1,4 @@
-console.log("EXPLORE JS LOADED");
+console.log("EXPLORE LOADED");
 
 const container = document.getElementById("chair-canvas");
 
