@@ -75,7 +75,8 @@ loader.load(
     function(gltf){
 
         const chair = gltf.scene;
-
+const box = new THREE.Box3().setFromObject(chair);
+console.log(box.getSize(new THREE.Vector3()));
         chair.traverse(function(child){
 
             if(child.isMesh){
