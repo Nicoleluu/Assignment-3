@@ -2,7 +2,7 @@ console.log("EXPLORE JS LOADED");
 
 let scene, camera, renderer, controls;
 
-const container = document.getElementById("chair-canvas");
+const container = document.getElementById("build-canvas");
 
 // Scene
 scene = new THREE.Scene();
@@ -64,32 +64,71 @@ const fillLight = new THREE.PointLight(0xffffff, 0.5);
 fillLight.position.set(0, 3, 2);
 scene.add(fillLight);
 
-// Load model
+// Load models
 const loader = new THREE.GLTFLoader();
 
-// Drill
-loader.load("models/electric_drill.glb", function(gltf){
+// ---------------- DRILL ----------------
+loader.load(
 
-    const drill = gltf.scene;
+    "models/electric_drill.glb",
 
-drill.traverse(function(child){
-    if(child.isMesh){
-        child.castShadow = true;
-        child.receiveShadow = true;
+    function(gltf){
+
+        const drill = gltf.scene;
+
+        drill.traverse(function(child){
+            if(child.isMesh){
+                child.castShadow = true;
+                child.receiveShadow = true;
+            }
+        });
+
+        drill.scale.set(0.35,0.35,0.35);
+        drill.position.set(-3,-1,1);
+
+        scene.add(drill);
+
+    },
+
+    undefined,
+
+    function(error){
+        console.log(error);
     }
-});
 
-// Table saw
-loader.load("models/table_saw_-_fbx.glb", function(gltf){
+);
 
-    const saw = gltf.scene;
 
-saw.traverse(function(child){
-    if(child.isMesh){
-        child.castShadow = true;
-        child.receiveShadow = true;
+// ---------------- TABLE SAW ----------------
+loader.load(
+
+    "models/table_saw_-_fbx.glb",
+
+    function(gltf){
+
+        const saw = gltf.scene;
+
+        saw.traverse(function(child){
+            if(child.isMesh){
+                child.castShadow = true;
+                child.receiveShadow = true;
+            }
+        });
+
+        saw.scale.set(0.7,0.7,0.7);
+        saw.position.set(2,-1,0);
+
+        scene.add(saw);
+
+    },
+
+    undefined,
+
+    function(error){
+        console.log(error);
     }
-});
+
+);
 
 // Animation
 function animate(){
