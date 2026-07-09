@@ -23,7 +23,7 @@ camera = new THREE.PerspectiveCamera(
     100
 );
 
-camera.position.set(0, 2, 8);
+camera.position.set(0, 6, 20);
 
 // ---------------- Renderer ----------------
 
@@ -45,8 +45,7 @@ container.appendChild(renderer.domElement);
 controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 controls.enableDamping = true;
-controls.autoRotate = true;
-controls.autoRotateSpeed = 0.35;
+controls.autoRotate = false;
 
 // ---------------- Lighting ----------------
 
@@ -115,8 +114,8 @@ loader.load(
 
         });
 
-        drill.scale.set(1.8,1.8,1.8);
-        drill.position.set(-3,-1,0);
+        drill.scale.set(0.05,0.05,0.05);
+        drill.position.set(-5,0,0);
 
         scene.add(drill);
 
@@ -156,8 +155,8 @@ loader.load(
 
         });
 
-        saw.scale.set(1.2,1.2,1.2);
-        saw.position.set(2,-1,0);
+        saw.scale.set(0.05,0.05,0.05);
+        saw.position.set(5,0,0);
 
         scene.add(saw);
 
