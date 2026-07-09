@@ -1,70 +1,71 @@
 console.log("EXPLORE JS LOADED");
 
-let scene, camera, renderer, controls;
-
 const container = document.getElementById("chair-canvas");
 
 // Scene
-scene = new THREE.Scene();
+const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xf7f4ee);
-scene.fog = new THREE.Fog(0xf7f4ee, 6, 18);
 
 // Camera
-camera = new THREE.PerspectiveCamera(
+const camera = new THREE.PerspectiveCamera(
     45,
     container.clientWidth / 500,
     0.1,
     100
 );
 
-camera.position.set(2.5, 2, 4);
+camera.position.set(0, 1.5, 6);
 
 // Renderer
-renderer = new THREE.WebGLRenderer({
+const renderer = new THREE.WebGLRenderer({
     antialias: true
 });
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(container.clientWidth, 500);
+
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 container.innerHTML = "";
 container.appendChild(renderer.domElement);
 
-// Orbit Controls
-controls = new THREE.OrbitControls(camera, renderer.domElement);
+// Controls
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 controls.enableDamping = true;
-controls.autoRotate = true;
-controls.autoRotateSpeed = 1;
+controls.enablePan = false;
+controls.autoRotate = false;
 
-// Lighting
-
-const ambient = new THREE.AmbientLight(0xffffff, 0.15);
+// Lights
+const ambient = new THREE.AmbientLight(0xffffff, 0.8);
 scene.add(ambient);
 
-// Main warm light
-const keyLight = new THREE.DirectionalLight(0xfff5ea, 2.4);
-keyLight.position.set(5, 6, 2);
-keyLight.castShadow = true;
+const light1 = new THREE.DirectionalLight(0xffffff, 1.2);
+light1.position.set(5, 6, 5);
+light1.castShadow = true;
+scene.add(light1);
 
-keyLight.shadow.mapSize.width = 2048;
-keyLight.shadow.mapSize.height = 2048;
+const light2 = new THREE.DirectionalLight(0xffffff, 0.6);
+light2.position.set(-5, 3, -5);
+scene.add(light2);
 
-scene.add(keyLight);
+// Ground
+const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(20,20),
+    new THREE.ShadowMaterial({
+        opacity:0.15
+    })
+);
 
-// Cool rim light
-const rimLight = new THREE.DirectionalLight(0xdfefff, 1.2);
-rimLight.position.set(-6, 3, -6);
-scene.add(rimLight);
+floor.rotation.x = -Math.PI/2;
+floor.position.y = -1;
 
-// Soft fill light
-const fillLight = new THREE.PointLight(0xffffff, 0.5);
-fillLight.position.set(0, 3, 2);
-scene.add(fillLight);
+floor.receiveShadow = true;
 
-// Load model
+scene.add(floor);
+
+// Loader
 const loader = new THREE.GLTFLoader();
 
 loader.load(
@@ -73,23 +74,23 @@ loader.load(
 
     function(gltf){
 
-       const chair = gltf.scene;
+        const chair = gltf.scene;
 
-chair.traverse(function(child){
+        chair.traverse(function(child){
 
-    if(child.isMesh){
+            if(child.isMesh){
 
-        child.castShadow = true;
-        child.receiveShadow = true;
+                child.castShadow = true;
+                child.receiveShadow = true;
 
-    }
+            }
 
-});
+        });
 
-chair.scale.set(1,1,1);
-chair.position.set(0,-1,0);
+        chair.scale.set(1,1,1);
+        chair.position.set(0,-1,0);
 
-scene.add(chair);
+        scene.add(chair);
 
     },
 
@@ -97,7 +98,7 @@ scene.add(chair);
 
     function(error){
 
-        console.log(error);
+        console.error(error);
 
     }
 
@@ -119,7 +120,7 @@ animate();
 // Resize
 window.addEventListener("resize",function(){
 
-    camera.aspect = container.clientWidth / 500;
+    camera.aspect = container.clientWidth/500;
 
     camera.updateProjectionMatrix();
 
