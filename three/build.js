@@ -1,3 +1,5 @@
+(function(){
+
 console.log("BUILD JS LOADED");
 
 let scene, camera, renderer, controls;
@@ -195,3 +197,5 @@ window.addEventListener("resize",function(){
     renderer.setSize(container.clientWidth,500);
 
 });
+
+ })();
