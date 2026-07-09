@@ -1,3 +1,5 @@
+console.log("NEW BUILD JS");
+
 (function(){
 
 console.log("BUILD JS LOADED");
