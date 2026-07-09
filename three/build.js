@@ -117,7 +117,8 @@ loader.load(
         drill.scale.set(0.05,0.05,0.05);
         drill.position.set(-5,0,0);
 
-        scene.add(drill);
+        console.log(drill);
+scene.add(drill);
 
     },
 
