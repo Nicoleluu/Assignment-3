@@ -14,7 +14,7 @@ const camera = new THREE.PerspectiveCamera(
     100
 );
 
-camera.position.set(0, 1.3, 5);
+camera.position.set(0,1.2,2.8);
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
@@ -87,7 +87,7 @@ loader.load(
 
         });
 
-       chair.scale.set(2,2,2);
+       chair.scale.set(8,8,8);
         chair.position.set(0,0,0);
 
         scene.add(chair);
