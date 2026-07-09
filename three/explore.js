@@ -1,6 +1,9 @@
-console.log("BUILD JS LOADED");
+{console.log("BUILD JS LOADED");
 
-let scene, camera, renderer, controls;
+let buildScene;
+let buildCamera;
+let buildRenderer;
+let buildControls;
 
 const container = document.getElementById("build-canvas");
 
@@ -195,3 +198,5 @@ window.addEventListener("resize",function(){
     renderer.setSize(container.clientWidth,500);
 
 });
+
+}
