@@ -1,20 +1,15 @@
-{console.log("BUILD JS LOADED");
+console.log("EXPLORE JS LOADED");
 
-let buildScene;
-let buildCamera;
-let buildRenderer;
-let buildControls;
+let scene, camera, renderer, controls;
 
-const container = document.getElementById("build-canvas");
+const container = document.getElementById("chair-canvas");
 
-// ---------------- Scene ----------------
-
+// Scene
 scene = new THREE.Scene();
 scene.background = new THREE.Color(0xf7f4ee);
 scene.fog = new THREE.Fog(0xf7f4ee, 6, 18);
 
-// ---------------- Camera ----------------
-
+// Camera
 camera = new THREE.PerspectiveCamera(
     45,
     container.clientWidth / 500,
@@ -22,102 +17,79 @@ camera = new THREE.PerspectiveCamera(
     100
 );
 
-camera.position.set(0, 2, 8);
+camera.position.set(2.5, 2, 4);
 
-// ---------------- Renderer ----------------
-
+// Renderer
 renderer = new THREE.WebGLRenderer({
     antialias: true
 });
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(container.clientWidth, 500);
-
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 container.innerHTML = "";
 container.appendChild(renderer.domElement);
 
-// ---------------- Controls ----------------
-
+// Orbit Controls
 controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 controls.enableDamping = true;
 controls.autoRotate = true;
-controls.autoRotateSpeed = 0.35;
+controls.autoRotateSpeed = 1;
 
-// ---------------- Lighting ----------------
+// Lighting
 
-const ambient = new THREE.AmbientLight(0xffffff, 0.35);
+const ambient = new THREE.AmbientLight(0xffffff, 0.15);
 scene.add(ambient);
 
-const keyLight = new THREE.DirectionalLight(0xfff5ea, 2.2);
-keyLight.position.set(5,6,2);
+// Main warm light
+const keyLight = new THREE.DirectionalLight(0xfff5ea, 2.4);
+keyLight.position.set(5, 6, 2);
 keyLight.castShadow = true;
+
 keyLight.shadow.mapSize.width = 2048;
 keyLight.shadow.mapSize.height = 2048;
+
 scene.add(keyLight);
 
-const rimLight = new THREE.DirectionalLight(0xdfefff,1.0);
-rimLight.position.set(-6,3,-6);
+// Cool rim light
+const rimLight = new THREE.DirectionalLight(0xdfefff, 1.2);
+rimLight.position.set(-6, 3, -6);
 scene.add(rimLight);
 
-const fillLight = new THREE.PointLight(0xffffff,0.5);
-fillLight.position.set(0,3,2);
+// Soft fill light
+const fillLight = new THREE.PointLight(0xffffff, 0.5);
+fillLight.position.set(0, 3, 2);
 scene.add(fillLight);
 
-// ---------------- Ground ----------------
-
-const floor = new THREE.Mesh(
-
-    new THREE.PlaneGeometry(20,20),
-
-    new THREE.ShadowMaterial({
-        opacity:0.18
-    })
-
-);
-
-floor.rotation.x = -Math.PI/2;
-floor.position.y = -1;
-
-floor.receiveShadow = true;
-
-scene.add(floor);
-
-// ---------------- Loader ----------------
-
+// Load model
 const loader = new THREE.GLTFLoader();
 
-
-// =====================
-// Drill
-// =====================
-
 loader.load(
 
-    "models/electric_drill.glb",
+    "models/eames_dcm_chair.glb",
 
     function(gltf){
 
-        const drill = gltf.scene;
+       const chair = gltf.scene;
 
-        drill.traverse(function(child){
+chair.traverse(function(child){
 
-            if(child.isMesh){
+    if(child.isMesh){
 
-                child.castShadow = true;
-                child.receiveShadow = true;
+        child.castShadow = true;
+        child.receiveShadow = true;
 
-            }
+    }
 
-        });
+});
 
-        drill.scale.set(1.8,1.8,1.8);
-        drill.position.set(-3,-1,0);
+chair.scale.set(1,1,1);
+chair.position.set(0,-1,0);
 
-        scene.add(drill);
+scene.add(chair);
 
     },
 
@@ -131,50 +103,7 @@ loader.load(
 
 );
 
-
-// =====================
-// Table Saw
-// =====================
-
-loader.load(
-
-    "models/table_saw_-_fbx.glb",
-
-    function(gltf){
-
-        const saw = gltf.scene;
-
-        saw.traverse(function(child){
-
-            if(child.isMesh){
-
-                child.castShadow = true;
-                child.receiveShadow = true;
-
-            }
-
-        });
-
-        saw.scale.set(1.2,1.2,1.2);
-        saw.position.set(2,-1,0);
-
-        scene.add(saw);
-
-    },
-
-    undefined,
-
-    function(error){
-
-        console.log(error);
-
-    }
-
-);
-
-
-// ---------------- Animation ----------------
-
+// Animation
 function animate(){
 
     requestAnimationFrame(animate);
@@ -187,16 +116,13 @@ function animate(){
 
 animate();
 
-// ---------------- Resize ----------------
-
+// Resize
 window.addEventListener("resize",function(){
 
-    camera.aspect = container.clientWidth/500;
+    camera.aspect = container.clientWidth / 500;
 
     camera.updateProjectionMatrix();
 
     renderer.setSize(container.clientWidth,500);
 
 });
-
-}
