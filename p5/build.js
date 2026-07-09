@@ -186,7 +186,23 @@ const labels = [
 button.innerHTML = labels[0];
 let targetPiece = null;
 let targetPosition = null;
+let targetPiece = null;
+let targetPosition = null;
+
+let step = 0;
+
+const labels = [
+    "Add Legs",
+    "Add Seat",
+    "Add Support",
+    "Add Backrest"
+];
+
+button.innerHTML = labels[0];
+
 button.onclick = function(){
+
+    if(targetPiece) return;
 
     if(step === pieces.length){
 
@@ -198,9 +214,8 @@ button.onclick = function(){
 
         button.innerHTML = labels[0];
 
-        targetPiece = null;
-
         return;
+
     }
 
     if(step === 0){
@@ -210,21 +225,21 @@ button.onclick = function(){
 
     }
 
-    else if(step === 1){
+    if(step === 1){
 
         targetPiece = seat;
         targetPosition = new THREE.Vector3(0,0.1,0);
 
     }
 
-    else if(step === 2){
+    if(step === 2){
 
         targetPiece = support;
         targetPosition = new THREE.Vector3(0,1,-0.8);
 
     }
 
-    else if(step === 3){
+    if(step === 3){
 
         targetPiece = back;
         targetPosition = new THREE.Vector3(0,2.2,-0.8);
@@ -237,9 +252,7 @@ button.onclick = function(){
 
         button.innerHTML = labels[step];
 
-    }
-
-    else{
+    }else{
 
         complete.style.opacity = "1";
 
