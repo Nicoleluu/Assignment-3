@@ -186,17 +186,6 @@ button.innerHTML = labels[0];
 let targetPiece = null;
 let targetPosition = null;
 
-let step = 0;
-
-const labels = [
-    "Add Legs",
-    "Add Seat",
-    "Add Support",
-    "Add Backrest"
-];
-
-button.innerHTML = labels[0];
-
 button.onclick = function(){
 
     if(targetPiece) return;
