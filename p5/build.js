@@ -251,24 +251,22 @@ button.onclick = function(){
 
 // ---------------- ANIMATION ----------------
 
-function animate(){
+function animate() {
 
     requestAnimationFrame(animate);
 
-    controls.update();
-
-    renderer.render(scene,camera);
+    renderer.render(scene, camera);
 
 }
 
 animate();
 
-window.addEventListener("resize",()=>{
+// ---------------- RESIZE ----------------
 
-    camera.aspect = container.clientWidth/500;
+window.addEventListener("resize", () => {
 
+    camera.aspect = container.clientWidth / 500;
     camera.updateProjectionMatrix();
-
-    renderer.setSize(container.clientWidth,500);
+    renderer.setSize(container.clientWidth, 500);
 
 });
