@@ -27,6 +27,9 @@
 <!-- GLTF Loader -->
 <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.js"></script>
 
+<!-- D3.js -->
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+
 </head>
 
 <body>
@@ -169,6 +172,42 @@
 
 </section>
 
+<!-- 06 -->
+
+<section id="temporal" class="section temporal-section">
+
+    <p class="section-number">06</p>
+
+    <h2>A Day in Use</h2>
+
+    <p>
+        A chair is not a static object. Across a day it shifts between focused work,
+        conversation, meals, rest, and periods of vacancy. This temporal map shows
+        how one chair participates in changing patterns of occupation.
+    </p>
+
+    <div class="temporal-card">
+        <div class="temporal-heading">
+            <div>
+                <span class="temporal-kicker">24-hour study</span>
+                <h3>The rhythm of sitting</h3>
+            </div>
+            <div id="temporal-legend" aria-label="Use categories"></div>
+        </div>
+        <div id="temporal-canvas" role="img" aria-label="Circular timeline showing how a chair is used over twenty-four hours"></div>
+        <p class="temporal-hint">Hover over an arc to inspect a moment</p>
+    </div>
+
+    <p class="temporal-reflection">
+        Temporal structure extends the precedent study beyond form and material.
+        Mapping duration and intensity reveals when the chair supports private,
+        productive, or social activity. In a future project, this same method could
+        inform flexible programs, lighting, circulation, and thresholds that respond
+        to changing occupancy throughout the day.
+    </p>
+
+</section>
+
 </footer>
 
 </main>
@@ -180,5 +219,6 @@
 
 <script src="three/explore.js"></script>
 <script src="p5/build.js"></script>
+<script src="temporal.js"></script>
 </body>
 </html>
