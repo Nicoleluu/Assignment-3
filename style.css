@@ -327,10 +327,10 @@ footer p{
 
 .temporal-card{
     margin-top:60px;
-    padding:28px 32px 20px;
-    color:#f4f1e9;
-    background:#1c2923;
-    box-shadow:0 24px 60px rgba(35,35,35,.12);
+    padding:34px 38px 24px;
+    color:var(--text);
+    background:transparent;
+    border:1px solid var(--line);
 }
 
 .temporal-heading{
@@ -338,8 +338,8 @@ footer p{
     justify-content:space-between;
     gap:30px;
     align-items:flex-start;
-    padding-bottom:20px;
-    border-bottom:1px solid rgba(255,255,255,.16);
+    padding-bottom:26px;
+    border-bottom:1px solid var(--line);
 }
 
 .temporal-kicker,
@@ -351,7 +351,7 @@ footer p{
     text-transform:uppercase;
 }
 
-.temporal-kicker{ color:#d8ff62; }
+.temporal-kicker{ color:#999; }
 
 .temporal-heading h3{
     margin-top:8px;
@@ -365,27 +365,37 @@ footer p{
     justify-content:flex-end;
     gap:12px 18px;
     max-width:520px;
-    color:#b6c1ba;
+    color:#777;
 }
 
 .temporal-legend-item{ display:flex; align-items:center; gap:7px; }
 .temporal-swatch{ width:8px; height:8px; border-radius:50%; }
 
 #temporal-canvas{
-    min-height:620px;
+    min-height:520px;
     display:grid;
     place-items:center;
 }
 
 #temporal-canvas svg{ width:100%; height:auto; overflow:visible; }
-.temporal-activity{ cursor:pointer; transition:opacity .2s; }
-.temporal-activity:hover{ opacity:.72; }
-.temporal-hour{ font:10px "IBM Plex Mono",monospace; fill:#89958e; }
+.temporal-event{ cursor:pointer; transition:opacity .2s; }
+.temporal-event:hover{ opacity:.68; }
+
+.temporal-axis text,
+.temporal-axis-note{
+    font:10px "IBM Plex Mono",monospace;
+    fill:#999;
+    letter-spacing:.08em;
+}
+
+.temporal-axis .domain{ stroke:var(--text); }
+.temporal-axis .tick line{ stroke:var(--line); }
+.temporal-row-label{ font:11px "IBM Plex Mono",monospace; fill:#555; }
 
 .temporal-hint{
     max-width:none !important;
     margin:0 !important;
-    color:#89958e !important;
+    color:#999 !important;
     text-align:center;
 }
 
@@ -398,9 +408,9 @@ footer p{
     opacity:0;
     min-width:190px;
     padding:13px 15px;
-    color:#17231d;
-    background:#d8ff62;
-    box-shadow:0 10px 30px rgba(0,0,0,.2);
+    color:white;
+    background:var(--text);
+    box-shadow:0 10px 30px rgba(35,35,35,.14);
     font:11px/1.6 "IBM Plex Mono",monospace;
     transition:opacity .12s;
 }
@@ -464,6 +474,6 @@ footer p{
     .temporal-card{ padding:20px 14px; }
     .temporal-heading{ display:block; }
     #temporal-legend{ justify-content:flex-start; margin-top:20px; }
-    #temporal-canvas{ min-height:420px; }
+    #temporal-canvas{ min-height:360px; overflow-x:auto; }
 
 }
