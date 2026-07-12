@@ -1,0 +1,14 @@
+start,end,activity,category,intensity
+00:00,07:30,Vacant,vacant,1
+07:30,08:15,Breakfast,dining,4
+08:15,09:00,Reading,rest,3
+09:00,11:30,Focused work,work,9
+11:30,12:15,Vacant,vacant,1
+12:15,13:00,Lunch,dining,5
+13:00,15:30,Studio work,work,8
+15:30,16:00,Coffee break,rest,4
+16:00,18:00,Design iteration,work,9
+18:00,19:30,Dinner,dining,6
+19:30,21:30,Conversation,social,6
+21:30,23:00,Reading,rest,3
+23:00,24:00,Vacant,vacant,1
