@@ -327,17 +327,14 @@ footer p{
 
 .temporal-card{
     margin-top:60px;
-    padding:34px 38px 24px;
+    padding:42px 44px 28px;
     color:var(--text);
     background:transparent;
     border:1px solid var(--line);
 }
 
 .temporal-heading{
-    display:flex;
-    justify-content:space-between;
-    gap:30px;
-    align-items:flex-start;
+    display:block;
     padding-bottom:26px;
     border-bottom:1px solid var(--line);
 }
@@ -355,24 +352,26 @@ footer p{
 
 .temporal-heading h3{
     margin-top:8px;
-    font-size:1.55rem;
-    font-weight:500;
+    font-size:1.7rem;
+    line-height:1.3;
+    font-weight:400;
 }
 
 #temporal-legend{
     display:flex;
     flex-wrap:wrap;
-    justify-content:flex-end;
-    gap:12px 18px;
-    max-width:520px;
+    justify-content:flex-start;
+    gap:12px 24px;
+    max-width:none;
+    margin-top:24px;
     color:#777;
 }
 
-.temporal-legend-item{ display:flex; align-items:center; gap:7px; }
-.temporal-swatch{ width:8px; height:8px; border-radius:50%; }
+.temporal-legend-item{ display:flex; align-items:center; gap:8px; white-space:nowrap; }
+.temporal-swatch{ display:inline-block; width:18px; height:8px; border-radius:1px; }
 
 #temporal-canvas{
-    min-height:520px;
+    min-height:610px;
     display:grid;
     place-items:center;
 }
@@ -390,7 +389,7 @@ footer p{
 
 .temporal-axis .domain{ stroke:var(--text); }
 .temporal-axis .tick line{ stroke:var(--line); }
-.temporal-row-label{ font:11px "IBM Plex Mono",monospace; fill:#555; }
+.temporal-row-label{ font:11px "IBM Plex Mono",monospace; fill:#555; letter-spacing:.015em; }
 
 .temporal-hint{
     max-width:none !important;
@@ -471,9 +470,8 @@ footer p{
 
     }
 
-    .temporal-card{ padding:20px 14px; }
-    .temporal-heading{ display:block; }
-    #temporal-legend{ justify-content:flex-start; margin-top:20px; }
-    #temporal-canvas{ min-height:360px; overflow-x:auto; }
+    .temporal-card{ padding:28px 18px 20px; }
+    #temporal-legend{ gap:10px 16px; margin-top:20px; }
+    #temporal-canvas{ min-height:450px; overflow-x:auto; }
 
 }

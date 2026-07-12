@@ -1,11 +1,11 @@
 // Adapted from the course events.csv temporal example.
 // The CSV schema remains exactly: name,start,end,category.
 const useColors = {
-    Vacant: "#DDD7CE",
-    Dining: "#C79A63",
-    Rest: "#9DA9A3",
-    Work: "#444444",
-    Social: "#A7664B"
+    Vacant: "#E6E2DA",
+    Dining: "#CDBEAA",
+    Rest: "#B8C5C0",
+    Work: "#8F9A91",
+    Social: "#C7B3AE"
 };
 
 const formatHour = hour => {
@@ -30,9 +30,9 @@ d3.csv("data/chair-use.csv", row => ({
         .html(category => `<i class="temporal-swatch" style="background:${useColors[category]}"></i>${category}`);
 
     const width = 920;
-    const height = 520;
-    const margin = { top: 58, right: 34, bottom: 64, left: 142 };
-    const rowHeight = 27;
+    const height = 610;
+    const margin = { top: 68, right: 38, bottom: 70, left: 170 };
+    const rowHeight = 34;
 
     const x = d3.scaleLinear()
         .domain([0, 24])
@@ -76,14 +76,14 @@ d3.csv("data/chair-use.csv", row => ({
         .attr("x", d => x(d.start))
         .attr("y", 0)
         .attr("width", d => Math.max(2, x(d.end) - x(d.start)))
-        .attr("height", 18)
+        .attr("height", 22)
         .attr("fill", d => useColors[d.category]);
 
     rows.append("line")
         .attr("x1", margin.left)
         .attr("x2", width - margin.right)
-        .attr("y1", 22)
-        .attr("y2", 22)
+        .attr("y1", 28)
+        .attr("y2", 28)
         .attr("stroke", "#DDD7CE")
         .attr("stroke-width", .7);
 
