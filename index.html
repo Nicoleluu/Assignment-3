@@ -13,7 +13,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=5">
 
     <!-- P5 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
@@ -28,7 +28,7 @@
 <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.js"></script>
 
 <!-- D3.js -->
-<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="vendor/d3.v7.9.0.min.js"></script>
 
 </head>
 
@@ -230,7 +230,9 @@
                 <button id="relational-reset" type="button">Reset view</button>
             </div>
         </div>
-        <div id="relational-canvas" role="img" aria-label="Interactive network of materials, processes, chair parts, and human use"></div>
+        <div id="relational-canvas" role="img" aria-label="Interactive network of materials, processes, chair parts, and human use">
+            <p class="relational-status">Loading relational network…</p>
+        </div>
         <div class="relational-meta">
             <span>13 nodes</span><span>19 relationships</span><span>synthetic study data</span>
         </div>
@@ -257,6 +259,6 @@
 <script src="three/explore.js"></script>
 <script src="p5/build.js"></script>
 <script src="temporal.js?v=4"></script>
-<script src="relational.js?v=1"></script>
+<script src="relational.js?v=2"></script>
 </body>
 </html>

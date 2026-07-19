@@ -468,6 +468,7 @@ footer p{
 #relational-reset:hover{ color:white; background:var(--text); }
 
 #relational-canvas{
+    display:grid;
     height:540px;
     overflow:hidden;
     background:rgba(255,255,255,.24);
@@ -476,6 +477,16 @@ footer p{
 
 #relational-canvas:active{ cursor:grabbing; }
 #relational-canvas svg{ display:block; width:100%; height:100%; }
+.relational-status{
+    align-self:center;
+    justify-self:center;
+    max-width:none !important;
+    color:#888 !important;
+    font:11px "IBM Plex Mono",monospace !important;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+}
+.relational-status.is-error{ color:#9a5547 !important; }
 .relational-link{ stroke:#4a4742; stroke-opacity:.3; }
 .relational-node{ stroke:var(--bg); stroke-width:2.5px; cursor:grab; }
 .relational-label{
