@@ -1,0 +1,20 @@
+source,target,relationship,course,since,strength,type,department
+DCM,Shell,composed of,,1946,0.9,directed,Design
+DCM,Frame,composed of,,1946,0.9,directed,Design
+DCM,Mounts,composed of,,1946,0.8,directed,Design
+DCM,Posture,supports,,1946,0.9,directed,Body
+DCM,Stacking,enables,,1946,0.7,directed,Performance
+Veneer,Shell,forms,,1946,0.9,directed,Material
+Lamination,Shell,shapes,,1946,0.9,directed,Fabrication
+Steel,Frame,forms,,1946,0.9,directed,Material
+Welding,Frame,joins,,1946,0.8,directed,Fabrication
+Rubber,Mounts,forms,,1946,0.9,directed,Material
+Adhesion,Mounts,bonds,,1946,0.9,directed,Fabrication
+Mounts,Shell,connects,,1946,0.9,bidirectional,Connection
+Mounts,Frame,connects,,1946,0.9,bidirectional,Connection
+Shell,Posture,cradles,,1946,0.9,directed,Body
+Shell,Flex,provides,,1946,0.8,directed,Performance
+Frame,Posture,stabilizes,,1946,0.8,directed,Body
+Frame,Stacking,lightens,,1946,0.7,directed,Performance
+Mounts,Flex,isolates,,1946,0.9,directed,Performance
+Adhesion,Flex,permits,,1946,0.7,directed,Performance

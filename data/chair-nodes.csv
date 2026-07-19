@@ -1,0 +1,14 @@
+id,name,role,age,department,friends,size,color
+DCM,DCM Chair,object,1946,Design,5,38,#232323
+Shell,Molded Plywood Shell,part,1946,Structure,5,35,#C79A63
+Frame,Steel Rod Frame,part,1946,Structure,4,31,#555555
+Mounts,Rubber Shock Mounts,part,1946,Connection,4,31,#555555
+Veneer,Birch Veneer,material,1946,Material,3,28,#D7B98B
+Steel,Steel Rod,material,1946,Material,2,25,#8A8A86
+Rubber,Synthetic Rubber,material,1946,Material,2,25,#8A8A86
+Lamination,Bent Lamination,process,1946,Fabrication,3,28,#9BA69E
+Welding,Spot Welding,process,1946,Fabrication,2,25,#9BA69E
+Adhesion,Adhesive Bonding,process,1946,Fabrication,3,28,#9BA69E
+Posture,Seated Posture,use,2026,Body,3,28,#B88F85
+Flex,Controlled Flex,use,2026,Performance,3,28,#B88F85
+Stacking,Lightweight Movement,use,2026,Performance,2,25,#B88F85
