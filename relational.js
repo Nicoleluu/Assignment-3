@@ -23,6 +23,7 @@ Promise.all([
         .html(d => `<i class="relational-swatch" style="background:${relationalColors[d]}"></i>${d}`);
 
     const host = document.querySelector("#relational-canvas");
+    host.replaceChildren();
     const width = host.clientWidth;
     const height = host.clientHeight;
     const svg = d3.select(host).append("svg").attr("viewBox", `0 0 ${width} ${height}`);
@@ -117,6 +118,7 @@ Promise.all([
 
     d3.select("#relational-reset").on("click", () => svg.transition().duration(600).call(zoom.transform, d3.zoomIdentity));
 }).catch(error => {
-    d3.select("#relational-canvas").append("p").text("Unable to load relational data. Run this site with Live Server.");
+    const host = document.querySelector("#relational-canvas");
+    host.innerHTML = '<p class="relational-status is-error">Unable to load the network. Refresh the page to try again.</p>';
     console.error(error);
 });
