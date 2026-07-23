@@ -15,6 +15,10 @@
 
     <link rel="stylesheet" href="style.css?v=5">
 
+    <!-- Mapbox GL JS -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.25.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.25.0/mapbox-gl.js"></script>
+
     <!-- P5 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
 
@@ -238,6 +242,48 @@
 
 </section>
 
+<!-- 08 -->
+
+<section id="geospatial" class="section geospatial-section">
+
+    <p class="section-number">08</p>
+
+    <h2>From Studio to Museum</h2>
+
+    <p>
+        The DCM is usually encountered as a single object, but its story stretches
+        across the United States. Follow its path from the Eames Office in California,
+        through Herman Miller’s Michigan production network, to MoMA’s design collection
+        in New York.
+    </p>
+
+    <div class="map-card">
+        <div class="map-heading">
+            <div>
+                <span class="map-kicker">A material geography · 1946–present</span>
+                <h3>One chair, three situated contexts</h3>
+            </div>
+            <button id="map-reset" type="button" aria-label="Reset map view">Reset view</button>
+        </div>
+
+        <div id="mapbox-canvas" role="region" aria-label="Interactive map tracing the Eames DCM chair from Los Angeles to Zeeland and New York">
+        </div>
+
+        <div class="map-legend" aria-label="Map legend">
+            <span><i class="map-legend-line"></i>Design journey</span>
+            <span><i class="map-legend-point"></i>Situated place</span>
+            <span>State boundaries: PublicaMundi</span>
+        </div>
+    </div>
+
+    <p class="geospatial-reflection">
+        Geospatial structures could extend this chair study by tracing where wood,
+        steel, labor, fabrication, distribution, and museum collections meet—making
+        the hidden geographic network behind a familiar object visible.
+    </p>
+
+</section>
+
 </footer>
 
 </main>
@@ -251,5 +297,7 @@
 <script src="p5/build.js"></script>
 <script src="temporal.js?v=4"></script>
 <script src="relational.js?v=2"></script>
+<script src="mapbox-config.js?v=2"></script>
+<script src="geospatial.js?v=1"></script>
 </body>
 </html>
