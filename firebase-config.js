@@ -3,11 +3,12 @@
 // The Firebase API key identifies your project; database security comes from
 // your Realtime Database Rules, not from hiding this browser-side configuration.
 window.FIREBASE_CONFIG = {
-    apiKey: "REPLACE_WITH_YOUR_API_KEY",
-    authDomain: "REPLACE_WITH_YOUR_PROJECT_ID.firebaseapp.com",
-    databaseURL: "https://REPLACE_WITH_YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
-    projectId: "REPLACE_WITH_YOUR_PROJECT_ID",
-    storageBucket: "REPLACE_WITH_YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "REPLACE_WITH_YOUR_SENDER_ID",
-    appId: "REPLACE_WITH_YOUR_APP_ID"
+    apiKey: "AIzaSyDp0V6_XHpsrOZmsb3snbpQh9oFfmG2l1I",
+    authDomain: "chair-501c5.firebaseapp.com",
+    databaseURL: "https://chair-501c5-default-rtdb.firebaseio.com",
+    projectId: "chair-501c5",
+    storageBucket: "chair-501c5.firebasestorage.app",
+    messagingSenderId: "43559735345",
+    appId: "1:43559735345:web:b7f187198f0e24aed94510",
+    measurementId: "G-KXSH890BMR"
 };

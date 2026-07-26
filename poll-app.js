@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const isConfigured = config
         && config.apiKey
+        && config.databaseURL
         && !Object.values(config).some(value => String(value).includes("REPLACE_WITH"));
 
     if (!isConfigured) {
