@@ -595,6 +595,86 @@ footer p{
 .map-legend-point{ width:9px; height:9px; border:2px solid var(--wood); border-radius:50%; background:var(--text); }
 .geospatial-reflection{ margin-top:42px; }
 
+/* ---------------- FIREBASE POLL ---------------- */
+
+.poll-card{
+    margin-top:60px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.24);
+}
+
+.poll-heading,
+.poll-footer{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    padding:22px 24px;
+}
+
+.poll-heading{ border-bottom:1px solid var(--line); }
+.poll-footer{ border-top:1px solid var(--line); }
+
+.poll-kicker,
+.poll-status,
+.poll-footer p{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:.68rem !important;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+}
+
+.poll-kicker{ color:#999; }
+.poll-heading h3{ margin-top:8px; font-size:1.65rem; font-weight:400; }
+.poll-status{ color:#888; }
+.poll-status::before{ content:""; display:inline-block; width:7px; height:7px; margin-right:8px; border-radius:50%; background:currentColor; }
+.poll-status.is-live{ color:#4f7654; }
+.poll-status.is-error{ color:#9a5547; }
+
+.poll-options{ display:grid; grid-template-columns:repeat(2,1fr); }
+
+.poll-option{
+    position:relative;
+    min-height:150px;
+    padding:28px;
+    overflow:hidden;
+    border:0;
+    border-bottom:1px solid var(--line);
+    color:var(--text);
+    background:transparent;
+    text-align:left;
+    cursor:pointer;
+}
+
+.poll-option:nth-child(odd){ border-right:1px solid var(--line); }
+.poll-option:nth-last-child(-n+2){ border-bottom:0; }
+.poll-option:not(:disabled):hover{ background:rgba(199,154,99,.1); }
+.poll-option:focus-visible{ outline:2px solid var(--text); outline-offset:-4px; }
+.poll-option:disabled{ color:var(--text); cursor:default; }
+.poll-option.is-selected{ background:rgba(199,154,99,.14); }
+
+.poll-option-copy,
+.poll-result{ position:relative; z-index:1; display:flex; }
+.poll-option-copy{ flex-direction:column; gap:7px; }
+.poll-option-copy strong{ font:500 1.2rem "Inter",sans-serif; }
+.poll-option-copy small{ color:#777; font:400 .75rem "IBM Plex Mono",monospace; }
+.poll-result{ justify-content:space-between; margin-top:30px; font:500 .75rem "IBM Plex Mono",monospace; }
+.poll-count::after{ content:" votes"; color:#888; font-weight:400; }
+
+.poll-bar{
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:var(--poll-width, 0%);
+    height:4px;
+    background:var(--wood);
+    transition:width .45s ease;
+}
+
+.poll-footer p{ max-width:none; color:#777; }
+.poll-footer p:last-child{ text-align:right; text-transform:none; letter-spacing:0; }
+.poll-ethics{ margin-top:34px; font-size:.88rem !important; color:#777 !important; }
+
 .mapboxgl-map{ font-family:"Inter",sans-serif; }
 .mapboxgl-ctrl-group{ border-radius:0; box-shadow:none; border:1px solid rgba(35,35,35,.2); }
 .mapboxgl-ctrl-group button{ width:34px; height:34px; }
@@ -699,5 +779,12 @@ footer p{
     #mapbox-canvas{ height:520px; }
     .map-legend{ align-items:flex-start; flex-direction:column; }
     .map-legend span:last-child{ margin-left:0; }
+
+    .poll-heading{ align-items:flex-start; }
+    .poll-options{ grid-template-columns:1fr; }
+    .poll-option:nth-child(odd){ border-right:0; }
+    .poll-option:nth-last-child(2){ border-bottom:1px solid var(--line); }
+    .poll-footer{ align-items:flex-start; flex-direction:column; gap:10px; }
+    .poll-footer p:last-child{ text-align:left; }
 
 }

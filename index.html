@@ -31,8 +31,12 @@
 <!-- GLTF Loader -->
 <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.js"></script>
 
-<!-- D3.js -->
-<script src="vendor/d3.v7.9.0.min.js"></script>
+    <!-- D3.js -->
+    <script src="vendor/d3.v7.9.0.min.js"></script>
+
+    <!-- Firebase Realtime Database -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 
 </head>
 
@@ -284,6 +288,66 @@
 
 </section>
 
+<!-- 09 -->
+
+<section id="poll" class="section poll-section">
+
+    <p class="section-number">09</p>
+
+    <h2>Where Would You Sit?</h2>
+
+    <p>
+        The DCM was designed to move between work, dining, conversation, and display.
+        If this chair were yours, where would it belong?
+    </p>
+
+    <div class="poll-card">
+        <div class="poll-heading">
+            <div>
+                <span class="poll-kicker">Community poll · live results</span>
+                <h3>Choose one setting</h3>
+            </div>
+            <span id="poll-status" class="poll-status" role="status">Connecting…</span>
+        </div>
+
+        <div id="poll-options" class="poll-options" aria-label="Poll choices">
+            <button class="poll-option" type="button" data-choice="workspace">
+                <span class="poll-option-copy"><strong>Workspace</strong><small>For focus and making</small></span>
+                <span class="poll-result"><span class="poll-count">0</span><span class="poll-percent">0%</span></span>
+                <span class="poll-bar" aria-hidden="true"></span>
+            </button>
+            <button class="poll-option" type="button" data-choice="dining">
+                <span class="poll-option-copy"><strong>Dining room</strong><small>For meals and gathering</small></span>
+                <span class="poll-result"><span class="poll-count">0</span><span class="poll-percent">0%</span></span>
+                <span class="poll-bar" aria-hidden="true"></span>
+            </button>
+            <button class="poll-option" type="button" data-choice="reading">
+                <span class="poll-option-copy"><strong>Reading corner</strong><small>For a quiet pause</small></span>
+                <span class="poll-result"><span class="poll-count">0</span><span class="poll-percent">0%</span></span>
+                <span class="poll-bar" aria-hidden="true"></span>
+            </button>
+            <button class="poll-option" type="button" data-choice="gallery">
+                <span class="poll-option-copy"><strong>Gallery</strong><small>For looking, not sitting</small></span>
+                <span class="poll-result"><span class="poll-count">0</span><span class="poll-percent">0%</span></span>
+                <span class="poll-bar" aria-hidden="true"></span>
+            </button>
+        </div>
+
+        <div class="poll-footer">
+            <p><strong id="poll-total">0</strong> responses</p>
+            <p id="poll-message">Select an option to contribute.</p>
+        </div>
+    </div>
+
+    <p class="poll-ethics">
+        <strong>About this data:</strong> This poll stores only the shared count for each
+        choice. It does not ask for a name, email, location, or demographic information.
+        A marker in your browser helps discourage repeat voting. Results are exploratory,
+        not representative, and should not be used to profile individual visitors.
+    </p>
+
+</section>
+
 </footer>
 
 </main>
@@ -299,5 +363,7 @@
 <script src="relational.js?v=2"></script>
 <script src="mapbox-config.js?v=2"></script>
 <script src="geospatial.js?v=1"></script>
+<script src="firebase-config.js?v=1"></script>
+<script src="poll-app.js?v=1"></script>
 </body>
 </html>
