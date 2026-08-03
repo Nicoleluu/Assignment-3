@@ -37,6 +37,7 @@
     <!-- Firebase Realtime Database -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-functions-compat.js"></script>
 
 </head>
 
@@ -348,6 +349,55 @@
 
 </section>
 
+<!-- 10 -->
+
+<section id="chat" class="section chat-section">
+
+    <p class="section-number">10</p>
+
+    <h2>Ask the Chair</h2>
+
+    <p>
+        Continue the study through conversation. Seat Guide can explain the DCM’s
+        materials, construction, history, and design decisions using the ideas explored above.
+    </p>
+
+    <div class="chat-card">
+        <div class="chat-heading">
+            <div>
+                <span class="chat-kicker">AI design guide · OpenAI + Firebase</span>
+                <h3>What would you like to notice?</h3>
+            </div>
+            <span id="chat-status" class="chat-status" role="status">Connecting…</span>
+        </div>
+
+        <div id="chat-messages" class="chat-messages" role="log" aria-live="polite" aria-label="Conversation with Seat Guide">
+            <article class="chat-message is-guide">
+                <span>Seat Guide</span>
+                <p>I’m here to help you look more closely at the Eames DCM. Ask about its plywood shell, steel frame, history, or the choices behind its form.</p>
+            </article>
+        </div>
+
+        <div class="chat-suggestions" aria-label="Suggested questions">
+            <button type="button">Why is the seat made from plywood?</button>
+            <button type="button">How does the frame support the body?</button>
+            <button type="button">What made the DCM innovative in 1946?</button>
+        </div>
+
+        <form id="chat-form" class="chat-form">
+            <label for="chat-input" class="sr-only">Ask Seat Guide a question</label>
+            <textarea id="chat-input" rows="2" maxlength="600" placeholder="Ask a question about the DCM chair…" required></textarea>
+            <button id="chat-send" type="submit">Ask</button>
+        </form>
+
+        <div class="chat-footer">
+            <p>AI responses can be inaccurate. Use them as a starting point for observation.</p>
+            <button id="chat-clear" type="button">Clear conversation</button>
+        </div>
+    </div>
+
+</section>
+
 </footer>
 
 </main>
@@ -365,5 +415,6 @@
 <script src="geospatial.js?v=1"></script>
 <script src="firebase-config.js?v=1"></script>
 <script src="poll-app.js?v=1"></script>
+<script src="chat-app.js?v=1"></script>
 </body>
 </html>

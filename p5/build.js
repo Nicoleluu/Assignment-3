@@ -1,3 +1,5 @@
+(() => {
+
 console.log("BUILD LOADED");
 
 const container = document.getElementById("build-canvas");
@@ -297,3 +299,5 @@ window.addEventListener("resize", () => {
     renderer.setSize(container.clientWidth, 500);
 
 });
+
+})();
