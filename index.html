@@ -1,420 +1,262 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Take a Seat.</title>
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Take a Seat is an interactive computational study of Charles and Ray Eames's DCM chair across seven digital structures.">
+    <meta name="theme-color" content="#efece5">
+    <title>Take a Seat — An Interactive DCM Study</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="style.css?v=5">
-
-    <!-- Mapbox GL JS -->
-    <link href="https://api.mapbox.com/mapbox-gl-js/v3.25.0/mapbox-gl.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v3.25.0/mapbox-gl.css">
+    <link rel="stylesheet" href="style.css?v=8">
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.25.0/mapbox-gl.js"></script>
-
-    <!-- P5 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
-
-   <!-- Three.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-<!-- Orbit Controls -->
-<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
-
-<!-- GLTF Loader -->
-<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.js"></script>
-
-    <!-- D3.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.js"></script>
     <script src="vendor/d3.v7.9.0.min.js"></script>
-
-    <!-- Firebase Realtime Database -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-functions-compat.js"></script>
-
 </head>
-
 <body>
+    <a class="skip-link" href="#project">Skip to project</a>
 
-<main>
-
-<!-- HERO -->
-
-<section class="hero">
-
-    <div class="hero-content">
-
-        <p class="label">
-            Interactive Chair Study
-        </p>
-
-        <h1>
-            Take a Seat.
-        </h1>
-
-        <p class="intro">
-            Discover one iconic chair through observation, drawing, interaction, and play.
-        </p>
-
-        <a href="#meet" class="button">
-            Begin
+    <header class="site-header">
+        <a class="wordmark" href="#top" aria-label="Take a Seat, home">
+            <span class="wordmark-mark" aria-hidden="true"></span>
+            <span>Take a Seat</span>
         </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Explore <span aria-hidden="true">+</span></button>
+        <nav id="site-nav" aria-label="Project chapters">
+            <a href="#spatial-2d"><span>01</span> 2D</a>
+            <a href="#spatial-3d"><span>02</span> 3D</a>
+            <a href="#temporal"><span>03</span> Time</a>
+            <a href="#relational"><span>04</span> Network</a>
+            <a href="#geospatial"><span>05</span> Place</a>
+            <a href="#poll"><span>06</span> Engage</a>
+            <a href="#chat"><span>07</span> Agent</a>
+        </nav>
+        <div class="scroll-progress" aria-hidden="true"><span></span></div>
+    </header>
 
-    </div>
-
-</section>
-
-<!-- 01 -->
-
-<section id="meet" class="section">
-
-    <p class="section-number">
-        01
-    </p>
-
-    <h2>
-        Meet
-    </h2>
-
-    <p>
-        Before taking the chair apart, let's simply look.
-        What makes this chair feel balanced, comfortable, and timeless?
-    </p>
-
-    <div id="chair-sketch-wrapper" class="canvas">
-
-    <div id="chair-sketch"></div>
-
-</div>
-    
-</section>
-
-<!-- 02 -->
-
-<section class="section">
-
-    <p class="section-number">
-        02
-    </p>
-
-    <h2>
-        Material Study
-    </h2>
-
-    <p>
-        Explore how flat veneers are pressed into a curved plywood shell through bent lamination.
-    </p>
-
-    <div id="material-canvas" class="canvas"></div>
-    
-</section>
-
-<!-- 03 -->
-
-<section class="section">
-
-    <p class="section-number">
-        03
-    </p>
-
-    <h2>
-        Blueprint
-    </h2>
-
-    <p>
-        Study the chair through orthographic drawings and dimensions. These views reveal the proportions and construction behind the final form.
-    </p>
-
-    <img
-        src="images/dcm-blueprint.png"
-        class="blueprint-image"
-        alt="Eames DCM Blueprint">
-
-</section>
-    
-<!-- 04 -->
-
-<section class="section">
-
-    <p class="section-number">
-        04
-    </p>
-
-    <h2>
-        Build
-    </h2>
-
-    <p>
-        Assemble the chair piece by piece.
-    </p>
-
-    <div id="build-canvas" class="canvas"></div>
-
-</section>
-    
-<!-- 05 -->
-
-<section class="section">
-
-    <p class="section-number">
-        05
-    </p>
-
-    <h2>
-        Explore
-    </h2>
-
-    <p>
-        Rotate and inspect the chair in 3D.
-    </p>
-
-    <div id="chair-canvas" class="canvas">
-        Three.js Canvas 01
-    </div>
-
-</section>
-
-<!-- 06 -->
-
-<section id="temporal" class="section temporal-section">
-
-    <p class="section-number">06</p>
-
-    <h2>A Day in Use</h2>
-
-    <p>
-        A chair is not a static object. Across a day it shifts between focused work,
-        conversation, meals, rest, and periods of vacancy. This temporal map shows
-        how one chair participates in changing patterns of occupation.
-    </p>
-
-    <div class="temporal-card">
-        <div class="temporal-heading">
-            <div>
-                <span class="temporal-kicker">24-hour study</span>
-                <h3>The rhythm of sitting</h3>
+    <main id="project">
+        <section id="top" class="hero">
+            <div class="hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow">Computational Design Workflows · Final Study</p>
+                    <h1>Take<br><em>a Seat.</em></h1>
+                    <p class="hero-intro">One chair, examined seven ways. Scroll through form, time, relationships, geography, participation, and conversation.</p>
+                    <a class="primary-link" href="#spatial-2d">Begin the study <span aria-hidden="true">↓</span></a>
+                </div>
+                <div class="hero-object" aria-hidden="true">
+                    <div class="hero-circle"></div>
+                    <div class="chair-glyph">
+                        <i class="chair-back"></i><i class="chair-seat"></i><i class="chair-frame"></i>
+                    </div>
+                    <p>DCM<br>1946</p>
+                </div>
             </div>
-            <div id="temporal-legend" aria-label="Use categories"></div>
-        </div>
-        <div id="temporal-canvas" role="img" aria-label="Circular timeline showing how a chair is used over twenty-four hours"></div>
-        <p class="temporal-hint">Hover over an arc to inspect a moment</p>
-    </div>
-
-    <p class="temporal-reflection">
-        This timeline shows how the chair’s role changes throughout the day.
-    </p>
-
-</section>
-
-<!-- 07 -->
-
-<section id="relational" class="section relational-section">
-
-    <p class="section-number">07</p>
-
-    <h2>A Chair Is a Network</h2>
-
-    <p>
-        Materials, processes, parts, and use come together in the DCM chair.
-    </p>
-
-    <div class="relational-card">
-        <div class="relational-toolbar">
-            <div id="relational-legend" aria-label="Network categories"></div>
-            <div class="relational-controls">
-                <span>Drag nodes · scroll to zoom</span>
-                <button id="relational-reset" type="button">Reset view</button>
+            <div class="hero-index" aria-label="Project overview">
+                <p><strong>07</strong><span>digital objects</span></p>
+                <p><strong>01</strong><span>design icon</span></p>
+                <p><strong>80</strong><span>years in use</span></p>
+                <p class="hero-index-note">A close reading of Charles and Ray Eames’s Dining Chair Metal through code.</p>
             </div>
-        </div>
-        <div id="relational-canvas" role="img" aria-label="Interactive network of materials, processes, chair parts, and human use">
-            <p class="relational-status">Loading relational network…</p>
-        </div>
-        <div class="relational-meta">
-            <span>13 nodes</span><span>19 relationships</span><span>synthetic study data</span>
-        </div>
-    </div>
+        </section>
 
-    <p class="relational-reflection">
-        Relational mapping reveals how one component can connect fabrication, comfort, and performance.
-    </p>
+        <section id="spatial-2d" class="chapter section">
+            <header class="chapter-header">
+                <div class="chapter-label"><span>Object 01 / 07</span><strong>2D spatial canvas</strong></div>
+                <div>
+                    <h2>Learning the chair<br><em>by drawing it.</em></h2>
+                    <p class="chapter-lede">The chair first becomes a set of lines, surfaces, and proportions. Three p5.js studies move from observation to material behavior and assembly.</p>
+                </div>
+            </header>
 
-</section>
-
-<!-- 08 -->
-
-<section id="geospatial" class="section geospatial-section">
-
-    <p class="section-number">08</p>
-
-    <h2>From Studio to Museum</h2>
-
-    <p>
-        The DCM is usually encountered as a single object, but its story stretches
-        across the United States. Follow its path from the Eames Office in California,
-        through Herman Miller’s Michigan production network, to MoMA’s design collection
-        in New York.
-    </p>
-
-    <div class="map-card">
-        <div class="map-heading">
-            <div>
-                <span class="map-kicker">A material geography · 1946–present</span>
-                <h3>One chair, three situated contexts</h3>
+            <div class="study-grid">
+                <article class="study-card study-card-large">
+                    <div class="study-caption"><span>01A · Observe</span><p>A generative line drawing reduces the DCM to its recognizable silhouette.</p></div>
+                    <div id="chair-sketch-wrapper" class="canvas"><div id="chair-sketch"></div></div>
+                </article>
+                <article class="study-card">
+                    <div class="study-caption"><span>01B · Bend</span><p>Move across the canvas to press flat veneer layers into a curved shell.</p></div>
+                    <div id="material-canvas" class="canvas"></div>
+                </article>
+                <article class="study-card">
+                    <div class="study-caption"><span>01C · Assemble</span><p>Add the frame, seat, and back to reveal the logic of the whole.</p></div>
+                    <div id="build-canvas" class="canvas"></div>
+                </article>
             </div>
-            <button id="map-reset" type="button" aria-label="Reset map view">Reset view</button>
-        </div>
 
-        <div id="mapbox-canvas" role="region" aria-label="Interactive map tracing the Eames DCM chair from Los Angeles to Zeeland and New York">
-        </div>
+            <figure class="blueprint-panel">
+                <img src="images/dcm-blueprint.png" alt="Orthographic blueprint of the Eames DCM chair showing its front and side proportions">
+                <figcaption><span>Reference drawing</span><p>Orthographic views make the chair’s compact proportions measurable: two separate plywood shells held by a slender welded-steel frame.</p></figcaption>
+            </figure>
 
-        <div class="map-legend" aria-label="Map legend">
-            <span><i class="map-legend-line"></i>Design journey</span>
-            <span><i class="map-legend-point"></i>Situated place</span>
-            <span>State boundaries: PublicaMundi</span>
-        </div>
-    </div>
+            <aside class="context-note">
+                <span>Context / intent</span>
+                <p>I used 2D canvas as a method of close looking. Rather than treating the DCM as a finished image, each interaction isolates a design operation—outline, lamination, proportion, and assembly. The studies are drawn in p5.js and reference the chair’s molded-plywood shells and tubular steel frame.</p>
+                <p class="context-meta">Tools: p5.js · mouse interaction · orthographic drawing</p>
+            </aside>
+        </section>
 
-    <p class="geospatial-reflection">
-        Geospatial structures could extend this chair study by tracing where wood,
-        steel, labor, fabrication, distribution, and museum collections meet—making
-        the hidden geographic network behind a familiar object visible.
-    </p>
-
-</section>
-
-<!-- 09 -->
-
-<section id="poll" class="section poll-section">
-
-    <p class="section-number">09</p>
-
-    <h2>Where Would You Sit?</h2>
-
-    <p>
-        The DCM was designed to move between work, dining, conversation, and display.
-        If this chair were yours, where would it belong?
-    </p>
-
-    <div class="poll-card">
-        <div class="poll-heading">
-            <div>
-                <span class="poll-kicker">Community poll · live results</span>
-                <h3>Choose one setting</h3>
+        <section id="spatial-3d" class="chapter section chapter-dark">
+            <header class="chapter-header">
+                <div class="chapter-label"><span>Object 02 / 07</span><strong>3D spatial canvas</strong></div>
+                <div>
+                    <h2>Form changes<br><em>as you move.</em></h2>
+                    <p class="chapter-lede">A two-dimensional photograph fixes a viewpoint. This WebGL model returns control to the viewer: rotate, zoom, and inspect the relationship between shell and frame.</p>
+                </div>
+            </header>
+            <div class="interactive-frame interactive-frame-dark">
+                <div class="frame-top"><span>Live model · GLB</span><span>Drag to rotate · scroll to zoom</span></div>
+                <div id="chair-canvas" class="canvas"><p class="loading-note">Loading three-dimensional chair…</p></div>
             </div>
-            <span id="poll-status" class="poll-status" role="status">Connecting…</span>
-        </div>
+            <aside class="context-note">
+                <span>Context / intent</span>
+                <p>I built this scene to study spatial relationships that flatten in elevation: the gap between seat and back, the angle of recline, and the lightness of the steel structure. OrbitControls makes inspection non-linear; the viewer decides which detail becomes foreground.</p>
+                <p class="context-meta">Tools: Three.js · GLTFLoader · OrbitControls · Eames DCM 3D model</p>
+            </aside>
+        </section>
 
-        <div id="poll-options" class="poll-options" aria-label="Poll choices">
-            <button class="poll-option" type="button" data-choice="workspace">
-                <span class="poll-option-copy"><strong>Workspace</strong><small>For focus and making</small></span>
-                <span class="poll-result"><span class="poll-count">0</span><span class="poll-percent">0%</span></span>
-                <span class="poll-bar" aria-hidden="true"></span>
-            </button>
-            <button class="poll-option" type="button" data-choice="dining">
-                <span class="poll-option-copy"><strong>Dining room</strong><small>For meals and gathering</small></span>
-                <span class="poll-result"><span class="poll-count">0</span><span class="poll-percent">0%</span></span>
-                <span class="poll-bar" aria-hidden="true"></span>
-            </button>
-            <button class="poll-option" type="button" data-choice="reading">
-                <span class="poll-option-copy"><strong>Reading corner</strong><small>For a quiet pause</small></span>
-                <span class="poll-result"><span class="poll-count">0</span><span class="poll-percent">0%</span></span>
-                <span class="poll-bar" aria-hidden="true"></span>
-            </button>
-            <button class="poll-option" type="button" data-choice="gallery">
-                <span class="poll-option-copy"><strong>Gallery</strong><small>For looking, not sitting</small></span>
-                <span class="poll-result"><span class="poll-count">0</span><span class="poll-percent">0%</span></span>
-                <span class="poll-bar" aria-hidden="true"></span>
-            </button>
-        </div>
-
-        <div class="poll-footer">
-            <p><strong id="poll-total">0</strong> responses</p>
-            <p id="poll-message">Select an option to contribute.</p>
-        </div>
-    </div>
-
-    <p class="poll-ethics">
-        <strong>About this data:</strong> This poll stores only the shared count for each
-        choice. It does not ask for a name, email, location, or demographic information.
-        A marker in your browser helps discourage repeat voting. Results are exploratory,
-        not representative, and should not be used to profile individual visitors.
-    </p>
-
-</section>
-
-<!-- 10 -->
-
-<section id="chat" class="section chat-section">
-
-    <p class="section-number">10</p>
-
-    <h2>Ask the Chair</h2>
-
-    <p>
-        Continue the study through conversation. Seat Guide can explain the DCM’s
-        materials, construction, history, and design decisions using the ideas explored above.
-    </p>
-
-    <div class="chat-card">
-        <div class="chat-heading">
-            <div>
-                <span class="chat-kicker">AI design guide · OpenAI + Firebase</span>
-                <h3>What would you like to notice?</h3>
+        <section id="temporal" class="chapter section">
+            <header class="chapter-header">
+                <div class="chapter-label"><span>Object 03 / 07</span><strong>Temporal structure</strong></div>
+                <div>
+                    <h2>A day measured<br><em>in occupied time.</em></h2>
+                    <p class="chapter-lede">Furniture is never truly static. This timeline records one imagined day of use, shifting between work, meals, conversation, rest, and vacancy.</p>
+                </div>
+            </header>
+            <div class="data-card temporal-card">
+                <div class="data-card-heading">
+                    <div><span>24-hour study</span><h3>The rhythm of sitting</h3></div>
+                    <div id="temporal-legend" aria-label="Use categories"></div>
+                </div>
+                <div id="temporal-canvas" role="img" aria-label="Timeline showing how a chair is used over twenty-four hours"></div>
+                <p class="interaction-hint">Hover over an interval to inspect a moment</p>
             </div>
-            <span id="chat-status" class="chat-status" role="status">Connecting…</span>
-        </div>
+            <aside class="context-note">
+                <span>Context / intent</span>
+                <p>I translated a synthetic daily-use log into duration, sequence, and recurrence. The goal was to describe the chair through events rather than appearance: occupancy is temporary, but repeated routines give the object a social life.</p>
+                <p class="context-meta">Tools: D3.js · CSV · synthetic 24-hour use dataset</p>
+            </aside>
+        </section>
 
-        <div id="chat-messages" class="chat-messages" role="log" aria-live="polite" aria-label="Conversation with Seat Guide">
-            <article class="chat-message is-guide">
-                <span>Seat Guide</span>
-                <p>I’m here to help you look more closely at the Eames DCM. Ask about its plywood shell, steel frame, history, or the choices behind its form.</p>
-            </article>
-        </div>
+        <section id="relational" class="chapter section">
+            <header class="chapter-header">
+                <div class="chapter-label"><span>Object 04 / 07</span><strong>Relational structure</strong></div>
+                <div>
+                    <h2>A chair is<br><em>a network.</em></h2>
+                    <p class="chapter-lede">The DCM is not a single form. It is an agreement among materials, fabrication processes, parts, bodies, and patterns of use.</p>
+                </div>
+            </header>
+            <div class="data-card relational-card">
+                <div class="relational-toolbar">
+                    <div id="relational-legend" aria-label="Network categories"></div>
+                    <div class="relational-controls"><span>Drag nodes · scroll to zoom</span><button id="relational-reset" type="button">Reset view</button></div>
+                </div>
+                <div id="relational-canvas" role="img" aria-label="Interactive network of materials, processes, chair parts, and human use"><p class="relational-status">Loading relational network…</p></div>
+                <div class="data-footer"><span>13 nodes</span><span>19 relationships</span><span>synthetic study data</span></div>
+            </div>
+            <aside class="context-note">
+                <span>Context / intent</span>
+                <p>I modeled the chair as connected entities instead of a hierarchy. Force-directed movement makes every category mutually dependent: pulling “plywood,” for example, changes the positions of molding, shell, comfort, and use. The graph turns relationships into a material that can be handled.</p>
+                <p class="context-meta">Tools: D3 force simulation · CSV node and edge lists</p>
+            </aside>
+        </section>
 
-        <div class="chat-suggestions" aria-label="Suggested questions">
-            <button type="button">Why is the seat made from plywood?</button>
-            <button type="button">How does the frame support the body?</button>
-            <button type="button">What made the DCM innovative in 1946?</button>
-        </div>
+        <section id="geospatial" class="chapter section chapter-map">
+            <header class="chapter-header">
+                <div class="chapter-label"><span>Object 05 / 07</span><strong>Geospatial structure</strong></div>
+                <div>
+                    <h2>Designed here.<br><em>Made there. Seen everywhere.</em></h2>
+                    <p class="chapter-lede">The chair’s story crosses the United States: experimentation in California, serial production in Michigan, and cultural preservation in New York.</p>
+                </div>
+            </header>
+            <div class="data-card map-card">
+                <div class="data-card-heading"><div><span>Material geography · 1946–present</span><h3>One chair, three situated contexts</h3></div><button id="map-reset" type="button" aria-label="Reset map view">Reset view</button></div>
+                <div id="mapbox-canvas" role="region" aria-label="Interactive map tracing the Eames DCM chair from Los Angeles to Zeeland and New York"></div>
+                <div class="data-footer map-legend"><span><i class="map-legend-line"></i>Design journey</span><span><i class="map-legend-point"></i>Situated place</span><span>Boundaries: PublicaMundi</span></div>
+            </div>
+            <aside class="context-note">
+                <span>Context / intent</span>
+                <p>I mapped three institutions to show how design value is produced across place: an idea begins in a studio, becomes repeatable through manufacturing, and enters a design canon through collection. A local D3 map remains fully functional when the optional Mapbox layer is unavailable.</p>
+                <p class="context-meta">Tools: Mapbox GL JS + D3 fallback · GeoJSON · PublicaMundi state boundaries</p>
+            </aside>
+        </section>
 
-        <form id="chat-form" class="chat-form">
-            <label for="chat-input" class="sr-only">Ask Seat Guide a question</label>
-            <textarea id="chat-input" rows="2" maxlength="600" placeholder="Ask a question about the DCM chair…" required></textarea>
-            <button id="chat-send" type="submit">Ask</button>
-        </form>
+        <section id="poll" class="chapter section chapter-accent">
+            <header class="chapter-header">
+                <div class="chapter-label"><span>Object 06 / 07</span><strong>Engagement component</strong></div>
+                <div>
+                    <h2>Where would<br><em>you sit?</em></h2>
+                    <p class="chapter-lede">The DCM moved easily between work, dining, conversation, and display. Add your imagined setting to a shared, anonymous portrait of use.</p>
+                </div>
+            </header>
+            <div class="poll-card">
+                <div class="data-card-heading"><div><span>Community poll · shared results</span><h3>Choose one setting</h3></div><span id="poll-status" class="status-pill" role="status">Connecting…</span></div>
+                <div id="poll-options" class="poll-options" aria-label="Poll choices">
+                    <button class="poll-option" type="button" data-choice="workspace"><span class="poll-option-index">A</span><span class="poll-option-copy"><strong>Workspace</strong><small>For focus and making</small></span><span class="poll-result"><span class="poll-count">0</span><span class="poll-percent">0%</span></span><span class="poll-bar" aria-hidden="true"></span></button>
+                    <button class="poll-option" type="button" data-choice="dining"><span class="poll-option-index">B</span><span class="poll-option-copy"><strong>Dining room</strong><small>For meals and gathering</small></span><span class="poll-result"><span class="poll-count">0</span><span class="poll-percent">0%</span></span><span class="poll-bar" aria-hidden="true"></span></button>
+                    <button class="poll-option" type="button" data-choice="reading"><span class="poll-option-index">C</span><span class="poll-option-copy"><strong>Reading corner</strong><small>For a quiet pause</small></span><span class="poll-result"><span class="poll-count">0</span><span class="poll-percent">0%</span></span><span class="poll-bar" aria-hidden="true"></span></button>
+                    <button class="poll-option" type="button" data-choice="gallery"><span class="poll-option-index">D</span><span class="poll-option-copy"><strong>Gallery</strong><small>For looking, not sitting</small></span><span class="poll-result"><span class="poll-count">0</span><span class="poll-percent">0%</span></span><span class="poll-bar" aria-hidden="true"></span></button>
+                </div>
+                <div class="poll-footer"><p><strong id="poll-total">0</strong> responses</p><p id="poll-message">Select an option to contribute.</p></div>
+            </div>
+            <aside class="context-note">
+                <span>Context / intent</span>
+                <p>I designed this poll to turn viewing into a small act of authorship. Firebase aggregates only four shared counts; it does not request names, contact details, location, or demographics. A local browser marker discourages repeat votes. Results are exploratory, not representative.</p>
+                <p class="context-meta">Tools: Firebase Realtime Database · anonymous aggregate counts · local offline fallback</p>
+            </aside>
+        </section>
 
-        <div class="chat-footer">
-            <p>AI responses can be inaccurate. Use them as a starting point for observation.</p>
-            <button id="chat-clear" type="button">Clear conversation</button>
-        </div>
-    </div>
+        <section id="chat" class="chapter section chapter-dark">
+            <header class="chapter-header">
+                <div class="chapter-label"><span>Object 07 / 07</span><strong>Agent</strong></div>
+                <div>
+                    <h2>Ask the chair<br><em>what to notice.</em></h2>
+                    <p class="chapter-lede">Seat Guide extends the project through conversation, connecting questions about material, structure, history, and use to details already explored above.</p>
+                </div>
+            </header>
+            <div class="chat-card">
+                <div class="data-card-heading"><div><span>AI design guide · OpenAI + Firebase</span><h3>What would you like to notice?</h3></div><span id="chat-status" class="status-pill" role="status">Connecting…</span></div>
+                <div id="chat-messages" class="chat-messages" role="log" aria-live="polite" aria-label="Conversation with Seat Guide">
+                    <article class="chat-message is-guide"><span>Seat Guide</span><p>I’m here to help you look more closely at the Eames DCM. Ask about its plywood shell, steel frame, history, or the choices behind its form.</p></article>
+                </div>
+                <div class="chat-suggestions" aria-label="Suggested questions"><button type="button">Why is the seat made from plywood?</button><button type="button">How does the frame support the body?</button><button type="button">What made the DCM innovative in 1946?</button></div>
+                <form id="chat-form" class="chat-form"><label for="chat-input" class="sr-only">Ask Seat Guide a question</label><textarea id="chat-input" rows="2" maxlength="600" placeholder="Ask a question about the DCM chair…" required></textarea><button id="chat-send" type="submit">Ask <span aria-hidden="true">↗</span></button></form>
+                <div class="chat-footer"><p>AI responses can be inaccurate. Use them as a starting point for observation.</p><button id="chat-clear" type="button">Clear conversation</button></div>
+            </div>
+            <aside class="context-note">
+                <span>Context / intent</span>
+                <p>I prompted the agent as a concise design-education companion rather than an authority. It redirects attention toward close observation and distinguishes fact from interpretation. The API key remains server-side; rate limits and input validation protect the public endpoint, while a disclosed local guide keeps the interaction useful if the cloud service is unavailable.</p>
+                <p class="context-meta">Tools: OpenAI Responses API · Firebase callable function · session-scoped conversation</p>
+            </aside>
+        </section>
 
-</section>
+        <section class="closing section">
+            <p class="eyebrow">End of study</p>
+            <h2>Seven structures.<br><em>One familiar object,<br>made strange again.</em></h2>
+            <div class="closing-grid"><p>This project treats the chair as more than furniture: it is an image, a volume, a schedule, a network, a journey, a social prompt, and a conversation.</p><a class="primary-link" href="#top">Return to the top <span aria-hidden="true">↑</span></a></div>
+        </section>
+    </main>
 
-</footer>
+    <footer class="site-footer"><p>Take a Seat · Computational Design Workflows</p><p>Designed and built by Nicole Lu · 2026</p><a href="https://github.com/Nicoleluu/CDW-Final">View source ↗</a></footer>
 
-</main>
-
-<script src="script.js"></script>
-
-<script src="p5/blueprint.js"></script>
-<script src="p5/sketch.js"></script>
-
-<script src="three/explore.js"></script>
-<script src="p5/build.js"></script>
-<script src="temporal.js?v=4"></script>
-<script src="relational.js?v=2"></script>
-<script src="mapbox-config.js?v=2"></script>
-<script src="geospatial.js?v=1"></script>
-<script src="firebase-config.js?v=1"></script>
-<script src="poll-app.js?v=1"></script>
-<script src="chat-app.js?v=1"></script>
+    <script src="script.js?v=3"></script>
+    <script src="p5/blueprint.js"></script>
+    <script src="p5/sketch.js"></script>
+    <script src="three/explore.js"></script>
+    <script src="p5/build.js"></script>
+    <script src="temporal.js?v=4"></script>
+    <script src="relational.js?v=2"></script>
+    <script src="mapbox-config.js?v=2"></script>
+    <script src="geospatial.js?v=2"></script>
+    <script src="firebase-config.js?v=1"></script>
+    <script src="poll-app.js?v=2"></script>
+    <script src="chat-app.js?v=2"></script>
 </body>
 </html>

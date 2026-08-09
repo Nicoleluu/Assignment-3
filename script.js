@@ -1,111 +1,56 @@
-// ------------------------------
-// Smooth Fade In
-// ------------------------------
+/* Shared page behavior: reveals, navigation state, progress, and mobile menu. */
+document.addEventListener("DOMContentLoaded", () => {
+    const revealItems = document.querySelectorAll(".section");
+    const navLinks = [...document.querySelectorAll("#site-nav a")];
+    const chapters = [...document.querySelectorAll(".chapter[id]")];
+    const menuButton = document.querySelector(".menu-toggle");
+    const progress = document.querySelector(".scroll-progress span");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const sections = document.querySelectorAll(".section");
-
-const observer = new IntersectionObserver((entries) => {
-
-    entries.forEach(entry => {
-
-        if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-        }
-
-    });
-
-}, {
-    threshold: 0.15
-});
-
-sections.forEach(section => {
-    observer.observe(section);
-});
-
-
-// ------------------------------
-// Hover Effect for Chair Parts
-// ------------------------------
-
-const parts = document.querySelectorAll(".part");
-
-parts.forEach(part => {
-
-    part.addEventListener("mouseenter", () => {
-
-        part.textContent = getDescription(part.textContent);
-
-    });
-
-    part.addEventListener("mouseleave", () => {
-
-        part.textContent = getName(part.textContent);
-
-    });
-
-});
-
-function getDescription(name){
-
-    switch(name){
-
-        case "Backrest":
-            return "Supports your back";
-
-        case "Seat":
-            return "Carries your weight";
-
-        case "Frame":
-            return "Connects every part";
-
-        case "Legs":
-            return "Keeps everything balanced";
-
-        default:
-            return name;
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+        revealItems.forEach(item => item.classList.add("show"));
+    } else {
+        const revealObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08, rootMargin: "0px 0px -8%" });
+        revealItems.forEach(item => revealObserver.observe(item));
     }
 
-}
+    const chapterObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            navLinks.forEach(link => link.classList.toggle("is-active", link.hash === `#${entry.target.id}`));
+        });
+    }, { rootMargin: "-30% 0px -60%", threshold: 0 });
+    chapters.forEach(chapter => chapterObserver.observe(chapter));
 
-function getName(text){
+    function closeMenu() {
+        document.body.classList.remove("menu-open");
+        menuButton?.setAttribute("aria-expanded", "false");
+        if (menuButton) menuButton.querySelector("span").textContent = "+";
+    }
 
-    if(text.includes("Supports")) return "Backrest";
-    if(text.includes("Carries")) return "Seat";
-    if(text.includes("Connects")) return "Frame";
-    if(text.includes("Keeps")) return "Legs";
+    menuButton?.addEventListener("click", () => {
+        const open = document.body.classList.toggle("menu-open");
+        menuButton.setAttribute("aria-expanded", String(open));
+        menuButton.querySelector("span").textContent = open ? "−" : "+";
+    });
+    navLinks.forEach(link => link.addEventListener("click", closeMenu));
 
-    return text;
-
-}
-
-
-// ------------------------------
-// Button Hover Animation
-// ------------------------------
-
-const button = document.querySelector(".button");
-
-button.addEventListener("mouseenter", () => {
-
-    button.textContent = "Let's Go →";
-
-});
-
-button.addEventListener("mouseleave", () => {
-
-    button.textContent = "Begin";
-
-});
-
-
-// ------------------------------
-// Reveal Hero Slightly on Scroll
-// ------------------------------
-
-window.addEventListener("scroll", () => {
-
-    const hero = document.querySelector(".hero");
-
-    hero.style.opacity = 1 - window.scrollY / 900;
-
+    let ticking = false;
+    window.addEventListener("scroll", () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+            const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+            const percent = scrollable > 0 ? Math.min(100, (window.scrollY / scrollable) * 100) : 0;
+            if (progress) progress.style.width = `${percent}%`;
+            ticking = false;
+        });
+    }, { passive: true });
 });
