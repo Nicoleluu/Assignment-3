@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const message = document.getElementById("poll-message");
     const config = window.FIREBASE_CONFIG;
     const voteKey = "dcm-setting-poll-v1";
+    const localCountsKey = "dcm-setting-poll-local-counts-v1";
+    const emptyCounts = { workspace: 0, dining: 0, reading: 0, gallery: 0 };
+    let localMode = false;
 
     if (!options.length) return;
 
@@ -14,10 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         && !Object.values(config).some(value => String(value).includes("REPLACE_WITH"));
 
     if (!isConfigured) {
-        status.textContent = "Setup needed";
-        status.classList.add("is-error");
-        message.textContent = "Add your Firebase configuration to firebase-config.js.";
-        options.forEach(option => option.disabled = true);
+        startLocalMode("Shared results are unavailable; your response will stay on this device.");
         return;
     }
 
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         totalElement.textContent = total;
     }, () => {
-        showError("The poll cannot read Firebase. Check your Realtime Database rules.");
+        startLocalMode("Shared results are unavailable; your response will stay on this device.");
     });
 
     const existingVote = localStorage.getItem(voteKey);
@@ -77,11 +77,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 localStorage.setItem(voteKey, choice);
                 setVotedState(choice);
             } catch (error) {
-                options.forEach(button => button.disabled = false);
-                showError("Your response was not saved. Please try again.");
+                startLocalMode("The network is unavailable; your response was saved only on this device.");
+                saveLocalVote(choice);
             }
         });
     });
+
+    // Do not leave the engagement component in a permanent connecting state.
+    window.setTimeout(() => {
+        if (status.textContent === "Offline" || status.textContent === "Connecting…") {
+            startLocalMode("Shared results are unavailable; your response will stay on this device.");
+        }
+    }, 4500);
 
     function setVotedState(choice) {
         options.forEach(option => {
@@ -96,5 +103,49 @@ document.addEventListener("DOMContentLoaded", () => {
         status.classList.remove("is-live");
         status.classList.add("is-error");
         message.textContent = text;
+    }
+
+    function startLocalMode(text) {
+        if (localMode) return;
+        localMode = true;
+        status.textContent = "Local mode";
+        status.classList.remove("is-live");
+        status.classList.add("is-error");
+        message.textContent = text;
+        renderCounts(readLocalCounts());
+        const existing = localStorage.getItem(voteKey);
+        options.forEach(option => {
+            option.disabled = Boolean(existing);
+            option.onclick = () => {
+                if (!localStorage.getItem(voteKey)) saveLocalVote(option.dataset.choice);
+            };
+        });
+        if (existing) setVotedState(existing);
+    }
+
+    function readLocalCounts() {
+        try { return { ...emptyCounts, ...JSON.parse(localStorage.getItem(localCountsKey) || "{}") }; }
+        catch (_) { return { ...emptyCounts }; }
+    }
+
+    function saveLocalVote(choice) {
+        const counts = readLocalCounts();
+        counts[choice] = (Number(counts[choice]) || 0) + 1;
+        localStorage.setItem(localCountsKey, JSON.stringify(counts));
+        localStorage.setItem(voteKey, choice);
+        renderCounts(counts);
+        setVotedState(choice);
+    }
+
+    function renderCounts(counts) {
+        const total = options.reduce((sum, option) => sum + (Number(counts[option.dataset.choice]) || 0), 0);
+        options.forEach(option => {
+            const count = Number(counts[option.dataset.choice]) || 0;
+            const percent = total ? Math.round((count / total) * 100) : 0;
+            option.querySelector(".poll-count").textContent = count;
+            option.querySelector(".poll-percent").textContent = `${percent}%`;
+            option.querySelector(".poll-bar").style.setProperty("--poll-width", `${percent}%`);
+        });
+        totalElement.textContent = total;
     }
 });

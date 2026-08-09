@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const sessionId = getSessionId();
 
     let chatWithSeatGuide;
+    let localMode = false;
 
     try {
         const app = firebase.apps.length ? firebase.app() : firebase.initializeApp(window.FIREBASE_CONFIG);
@@ -47,11 +48,13 @@ document.addEventListener("DOMContentLoaded", () => {
             history.push({ role: "assistant", content: response });
             status.textContent = "Ready";
         } catch (error) {
-            thinking.querySelector("p").textContent = friendlyError(error);
+            localMode = true;
+            thinking.querySelector("p").textContent = localGuideResponse(message);
             thinking.classList.remove("is-thinking");
-            thinking.classList.add("is-error");
-            history.pop();
-            status.textContent = "Try again";
+            history.push({ role: "assistant", content: thinking.querySelector("p").textContent });
+            status.textContent = "Local guide";
+            status.classList.remove("is-live");
+            status.classList.add("is-error");
         } finally {
             setBusy(false);
             input.focus();
@@ -113,6 +116,23 @@ document.addEventListener("DOMContentLoaded", () => {
         if (error.code === "functions/invalid-argument") return "Please shorten or revise that question and try again.";
         if (error.code === "functions/failed-precondition") return "Seat Guide is not fully configured yet.";
         return "I couldn’t answer just now. Please try again in a moment.";
+    }
+
+    function localGuideResponse(message) {
+        const question = message.toLowerCase();
+        if (question.includes("plywood") || question.includes("seat") || question.includes("back")) {
+            return "Look at the seat and back as two separate, gently curved shells. Molded plywood allowed the Eameses to use thin layers for strength while shaping each surface to meet the body. Notice how the gap between them lets the frame stay visually light.";
+        }
+        if (question.includes("frame") || question.includes("support") || question.includes("steel")) {
+            return "The welded steel frame works like a quiet diagram of forces: front and rear legs rise to support the seat, then continue toward the back. Its thin profile makes the heavier plywood shells appear to float. Rotate the 3D study and follow one tube through the structure.";
+        }
+        if (question.includes("1946") || question.includes("history") || question.includes("innovative")) {
+            return "The DCM joined wartime experiments in molded plywood to an affordable postwar domestic chair. Separating the seat and back made the curves easier to produce and allowed each shell to respond to the body. Compare that economy of parts with the network study above.";
+        }
+        if (question.includes("comfort") || question.includes("body") || question.includes("ergonomic")) {
+            return "Comfort comes from several small decisions rather than upholstery: a scooped seat, a curved back, a slight recline, and rubber shock mounts between shell and frame. In the 3D view, inspect how these angles support different postures without making the chair look heavy.";
+        }
+        return "Start with one detail: the gap between the two plywood shells, the continuous steel frame, or the chair’s slight backward lean. Each reveals how the DCM balances efficient manufacture with bodily comfort. Which of those details do you want to investigate?";
     }
 
     function getSessionId() {

@@ -1,15 +1,24 @@
-# Assignment · Engagement Component with Firebase
+# Final assignment submission
 
-## Website
+Submit these **two working links** in CourseWorks:
 
-[View the interactive website](https://nicoleluu.github.io/Assignment-3/#poll)
+1. Website: https://nicoleluu.github.io/CDW-Final/
+2. Public repository: https://github.com/Nicoleluu/CDW-Final
 
-## Screenshot
+## Requirement checklist
 
-![Where Would You Sit Firebase poll](images/firebase-poll-update.jpg)
+- [x] 2D spatial canvas
+- [x] 3D spatial canvas
+- [x] Temporal structure
+- [x] Relational structure
+- [x] Geospatial structure
+- [x] Engagement component
+- [x] Agent
+- [x] Clear, structured, responsive layout
+- [x] Context statement for every digital object
+- [x] Interactions, datasets, tools, and references identified
+- [x] Clearly organized and commented repository
+- [x] Style, feature-planning, and project-ideas Markdown files
+- [x] Public website and repository links
 
-## How I might use this approach
-
-This anonymous poll adds a community perspective to my chair study. Asking visitors where they would place the DCM helps compare the chair’s history as a practical object with its later status as a collectible design icon. Firebase Realtime Database aggregates each choice and immediately returns the shared results, so the component can reveal how the audience collectively imagines the chair in use.
-
-I intentionally collect only the four aggregate vote counts—not names, emails, locations, or demographic information. The one-vote marker stays in the visitor’s own browser and is not sent to Firebase. This makes the results lower-risk, but they are still a self-selected sample rather than representative research. If the project grew, I would publish a retention policy, restrict database writes with stronger validation and authentication, and avoid combining these responses with individual profiles.
+Before submitting, open both links in a private browser window and confirm that the home page, model, datasets, and scripts load without authentication.
